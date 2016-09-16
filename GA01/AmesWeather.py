@@ -24,6 +24,11 @@ def dateToTimeStamp(dt):
     return timestamp
 
 
+def currentDate():
+    dateNow = datetime.datetime.now()
+    return dateNow
+
+
 def dateOffset(dt, type):
     response = -1
     if type == 'W' or type == 'D':
