@@ -5,17 +5,10 @@
 from weather import current, historical
 import datetime
 import sys
+import re
 
 version = "00.10"
-helps = "For pressure, type P. For temperature type T. For wind speed WS. For wind direction type WD."
 
-if len(sys.argv) >= 2:
-    if sys.argv[1] == '--version':
-        print("Running AmesWeather v." + version)
-    elif sys.argv[1] == "-h" or sys.argv[0] == "-help":
-        print(helps)
-else:
-    print("No argument supplied")
 
 def stringToDate(str):
     format = '%m/%d/%Y:%H:%M'
@@ -27,11 +20,6 @@ def dateToTimeStamp(dt):
     timestamp = dt.timestamp()
     timestamp = int(timestamp)
     return timestamp
-
-
-def currentDate():
-    dateNow = datetime.datetime.now()
-    return dateNow
 
 
 def dateOffset(dt, type):
@@ -71,6 +59,13 @@ def dateOffset(dt, type):
         response = dateToTimeStamp(dateobj)
     return response
 
+for i in range(0, len(sys.argv)):
+    if sys.argv[0] == '--version':
+        print('Running AmesWeather v' + version)
+    elif sys.argv[0] == '--help' or sys.argv[0] == '-h':
+        print('Somethig')
+    elif sys.argv[0][0].isdigit():
+            formattedDate = stringToDate(sys.argv[0])
 
 # HERE'S AN EXAMPLE OF HOW THESE DATE FUNCTIONS WORK.
 # We can delete this later
