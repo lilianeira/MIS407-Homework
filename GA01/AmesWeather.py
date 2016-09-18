@@ -6,11 +6,16 @@ from weather import current, historical
 import datetime
 import sys
 
+version = "00.10"
+helps = "For pressure, type P. For temperature type T. For wind speed WS. For wind direction type WD."
 
-for i in range(0, len(sys.argv)):
-    print(sys.argv[i])
-    # TODO: command line stuff goes here probably
-
+if len(sys.argv) >= 2:
+    if sys.argv[1] == '--version':
+        print("Running AmesWeather v." + version)
+    elif sys.argv[1] == "-h" or sys.argv[0] == "-help":
+        print(helps)
+else:
+    print("No argument supplied")
 
 def stringToDate(str):
     format = '%m/%d/%Y:%H:%M'
