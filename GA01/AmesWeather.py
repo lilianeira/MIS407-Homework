@@ -63,7 +63,7 @@ def dateOffset(dt, type):
     return response
 
 
-def (raw, type, format, wdate):
+def p(raw, type, format, wdate):
     response = 'N/A'
     if raw == 'P':
         if type == 'current':
@@ -72,16 +72,16 @@ def (raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            if (stamp > now)
+            if stamp > now:
                 response = 'N/A'
             else:
                 response = historical.getPressure(stamp, format)
     else:
-        offsetType = raw[-2:]
+        offsetType = raw[-1:]
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        if (stamp > now)
+        if stamp > now:
             response = 'N/A'
         else:
             response = historical.getPressure(stamp, format)
@@ -90,6 +90,78 @@ def (raw, type, format, wdate):
 
 def unkown():
     return('N/A')
+
+def t(raw, type, format, wdate):
+    response = 'N/A'
+    if raw == 'T':
+        if type == 'current':
+            response = current.getTemp(format)
+        elif type == 'historical':
+            now = datetime.datetime.now()
+            nowStamp = dateToTimeStamp(now)
+            stamp = dateToTimeStamp(wdate)
+            if stamp > now:
+                response = 'N/A'
+            else:
+                response = historical.getTemp(stamp, format)
+    else:
+        offsetType = raw[-1:]
+        now = datetime.datetime.now()
+        nowStamp = dateToTimeStamp(now)
+        stamp = dateOffset(wdate, offsetType)
+        if stamp > now:
+            response = 'N/A'
+        else:
+            response = historical.getTemp(stamp, format)
+    return(response)
+
+def ws(raw, type, format, wdate):
+    response = 'N/A'
+    if raw == 'WS':
+        if type == 'current':
+            response = current.getWindSpeed(format)
+        elif type == 'historical':
+            now = datetime.datetime.now()
+            nowStamp = dateToTimeStamp(now)
+            stamp = dateToTimeStamp(wdate)
+            if stamp > now:
+                response = 'N/A'
+            else:
+                response = historical.getWindSpeed(stamp, format)
+    else:
+        offsetType = raw[-1:]
+        now = datetime.datetime.now()
+        nowStamp = dateToTimeStamp(now)
+        stamp = dateOffset(wdate, offsetType)
+        if stamp > now:
+            response = 'N/A'
+        else:
+            response = historical.getWindSpeed(stamp, format)
+    return(response)
+
+def wd(raw, type, format, wdate):
+    response = 'N/A'
+    if raw == 'WD':
+        if type == 'current':
+            response = current.getWindDir(format)
+        elif type == 'historical':
+            now = datetime.datetime.now()
+            nowStamp = dateToTimeStamp(now)
+            stamp = dateToTimeStamp(wdate)
+            if stamp > now:
+                response = 'N/A'
+            else:
+                response = historical.getWindDir(stamp, format)
+    else:
+        offsetType = raw[-1:]
+        now = datetime.datetime.now()
+        nowStamp = dateToTimeStamp(now)
+        stamp = dateOffset(wdate, offsetType)
+        if stamp > now:
+            response = 'N/A'
+        else:
+            response = historical.getWindDir(stamp, format)
+    return(response)
 
 
 switcher = { 'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
@@ -102,7 +174,7 @@ wtype = 'current'
 wformat = 'us'
 startingPoint = 1
 
-if sys.argv.len > 1:
+if len(sys.argv) > 1:
     if sys.argv[1] == '--version':
         print('Running AmesWeather v' + version)
     elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
