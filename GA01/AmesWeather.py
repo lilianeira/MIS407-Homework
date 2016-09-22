@@ -12,8 +12,11 @@ version = "00.10"
 
 def stringToDate(str):
     format = '%m/%d/%Y:%H:%M'
-    newDate = datetime.datetime.strptime(str, format)
-    return newDate
+    try:
+        newDate = datetime.datetime.strptime(str, format)
+        return newDate
+    except ValueError as e:
+        raise ValueError('Invalid date format. Type --help for help. : {0}'.format(e))
 
 
 def dateToTimeStamp(dt):
@@ -59,31 +62,79 @@ def dateOffset(dt, type):
         response = dateToTimeStamp(dateobj)
     return response
 
-for i in range(0, len(sys.argv)):
-    if sys.argv[0] == '--version':
+
+def (raw, type, format, wdate):
+    response = 'N/A'
+    if raw == 'P':
+        if type == 'current':
+            response = current.getPressure(format)
+        elif type == 'historical':
+            now = datetime.datetime.now()
+            nowStamp = dateToTimeStamp(now)
+            stamp = dateToTimeStamp(wdate)
+            if (stamp > now)
+                response = 'N/A'
+            else:
+                response = historical.getPressure(stamp, format)
+    else:
+        offsetType = raw[-2:]
+        now = datetime.datetime.now()
+        nowStamp = dateToTimeStamp(now)
+        stamp = dateOffset(wdate, offsetType)
+        if (stamp > now)
+            response = 'N/A'
+        else:
+            response = historical.getPressure(stamp, format)
+    return(response)
+
+
+def unkown():
+    return('N/A')
+
+
+switcher = { 'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
+            'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
+            'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
+            'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
+
+s = ''
+wtype = 'current'
+wformat = 'us'
+startingPoint = 1
+
+if sys.argv.len > 1:
+    if sys.argv[1] == '--version':
         print('Running AmesWeather v' + version)
-    elif sys.argv[0] == '--help' or sys.argv[0] == '-h':
-        print('Somethig')
-    elif sys.argv[0][0].isdigit():
-            formattedDate = stringToDate(sys.argv[0])
+    elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
+        print('Someone should eventually put some help here.')
+    else:
+        # If no help of version command was called,
+        # that means it is weather time!
 
-# HERE'S AN EXAMPLE OF HOW THESE DATE FUNCTIONS WORK.
-# We can delete this later
+        # TODO: Before we can start looping through comands,
+        # we need to figure out which optional
+        # arguments are supplied!
+        if sys.argv[1] == '-M':
+            wformat = 'si'
+            startingPoint = 2
+        elif sys.argv[1] not in switcher:
+            # if the first value here is not in switcher,
+            # it is either the date or WRONG
+            wtype = 'historical'
+            wdate = stringToDate(sys.argv[1])
+            if sys.arv[2] == '-M':
+                wformat = 'si'
+                startingPoint = 3
+            else:
+                startingPoint = 2
+        else:
+            wdate = 0
 
-# turns the string into python's datetime format
-testDate = stringToDate('2/12/2015:17:37')
-print(testDate)
-
-# turns the datetime object into a UNIX timestamp
-testTimeStamp = dateToTimeStamp(testDate)
-print(testTimeStamp)
-
-# turns the datetime object into a UNIX timestamp for 1 day before
-print(dateOffset(testDate, 'D'))
-# turns the datetime object into a UNIX timestamp for 1 month before
-print(dateOffset(testDate, 'M'))
-
-# gets temp from timestamp
-print(historical.getTemp(str(testTimeStamp)))
-
-# END EXAMPLES
+        for i in range(startingPoint, len(argv)):
+            fun = switcher.get(argv[i], unkown)()
+            s = s + fun(argv[i], wtype, wformat, wdate) + ","
+            if i == len(argv)-1:
+                s = s[:-1]
+        print(s)
+else:
+    print('No arguments provided. Type --help for help.')
