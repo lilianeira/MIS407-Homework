@@ -28,39 +28,17 @@ def dateToTimeStamp(dt):
 
 def dateOffset(dt, type):
     response = -1
-    if type == 'W' or type == 'D':
-        # 1 week and 1 day will always be the same amount of time
-        # so we can just subtract the seconds from the timestamp
-        timeStampTemp = dateToTimeStamp(dt)
-        if type == 'W':
-            response = timeStampTemp - 604800
-        elif type == 'D':
-            response = timeStampTemp - 86400
-    elif type == 'Y' or type == 'M':
-        # month and year could differ, so we can't just subtract seconds
-        format1 = '%m||%d||%Y||%H||%M'
-        dateString = dt.strftime(format1)
-        dateInfo = dateString.split('||')
-        month = dateInfo[0]
-        day = dateInfo[1]
-        year = dateInfo[2]
-        hour = dateInfo[3]
-        minutes = dateInfo[4]
-        # FIXME? leap year? currently uses last year's 28th.
-        if int(month) == 2 and int(day) == 29:
-            day = '28'
-        if type == 'Y':
-            year = str(int(year) - 1)
-        elif type == 'M':
-            tempM = int(month)
-            if tempM == 1:
-                month = '12'
-                year = str(int(year) - 1)
-            else:
-                month = str(int(month) - 1)
-        dateString2 = month+'/'+day+'/'+year+':'+hour+':'+minutes
-        dateobj = stringToDate(dateString2)
-        response = dateToTimeStamp(dateobj)
+    timeStampTemp = dateToTimeStamp(dt)
+    if type == 'W':
+        response = timeStampTemp - 604800
+    elif type == 'D':
+        response = timeStampTemp - 86400
+    elif type == 'M':
+        # ueses 30 days as a 'month'
+        response = timeStampTemp - 2592000
+    elif type == 'Y':
+        # ueses 365 days as a 'year'
+        response = timeStampTemp - 31536000
     return response
 
 
