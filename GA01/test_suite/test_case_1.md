@@ -13,13 +13,13 @@ Pass/fail Date and Version tested. (hint: these should all pass :)
 
 #Test Case: 1
 =============
-1.
-```
-os.system('python AmesWeather.py -M P T WS WD')
+1. ```os.system('python AmesWeather.py -M P T WS WD')
 ```
 This Test Case uses metric system to test the current pressure, temperature, wind speed and wind direction in Ames.
 
-2. ``` -M P T WS WD ```
+2. Command being tested:
+``` -M P T WS WD
+```
   * -M: switch the measure system to metric system
   * P: test the pressure
   * T: test the temperature
@@ -27,7 +27,7 @@ This Test Case uses metric system to test the current pressure, temperature, win
   * WD: test the wind direction
 
 3. We expect to get 1015 hpa on pressure, 30.0 degree on temperature, 0.5 m/s on wind speed and 174 on wind direction
-4.
+4. Observed output:
 ```
 $ python test_script.py
 1015,29.44,0.51,140
