@@ -75,7 +75,7 @@ def p(raw, type, format, wdate):
             if stamp > nowStamp:
                 response = 'N/A'
             else:
-                response = historical.getPressure(stamp, format)
+                response = historical.getPressure(str(stamp), format)
     else:
         offsetType = raw[-1:]
         now = datetime.datetime.now()
@@ -84,7 +84,7 @@ def p(raw, type, format, wdate):
         if stamp > nowStamp:
             response = 'N/A'
         else:
-            response = historical.getPressure(stamp, format)
+            response = historical.getPressure(str(stamp), format)
     return(response)
 
 
@@ -103,7 +103,7 @@ def t(raw, type, format, wdate):
             if stamp > nowStamp:
                 response = 'N/A'
             else:
-                response = historical.getTemp(stamp, format)
+                response = historical.getTemp(str(stamp), format)
     else:
         offsetType = raw[-1:]
         now = datetime.datetime.now()
@@ -112,7 +112,7 @@ def t(raw, type, format, wdate):
         if stamp > nowStamp:
             response = 'N/A'
         else:
-            response = historical.getTemp(stamp, format)
+            response = historical.getTemp(str(stamp), format)
     return(response)
 
 def ws(raw, type, format, wdate):
@@ -127,7 +127,7 @@ def ws(raw, type, format, wdate):
             if stamp > nowStamp:
                 response = 'N/A'
             else:
-                response = historical.getWindSpeed(stamp, format)
+                response = historical.getWindSpeed(str(stamp), format)
     else:
         offsetType = raw[-1:]
         now = datetime.datetime.now()
@@ -136,7 +136,7 @@ def ws(raw, type, format, wdate):
         if stamp > nowStamp:
             response = 'N/A'
         else:
-            response = historical.getWindSpeed(stamp, format)
+            response = historical.getWindSpeed(str(stamp), format)
     return(response)
 
 def wd(raw, type, format, wdate):
@@ -151,7 +151,7 @@ def wd(raw, type, format, wdate):
             if stamp > nowStamp:
                 response = 'N/A'
             else:
-                response = historical.getWindDir(stamp, format)
+                response = historical.getWindDir(str(stamp), format)
     else:
         offsetType = raw[-1:]
         now = datetime.datetime.now()
@@ -160,7 +160,7 @@ def wd(raw, type, format, wdate):
         if stamp > nowStamp:
             response = 'N/A'
         else:
-            response = historical.getWindDir(stamp, format)
+            response = historical.getWindDir(str(stamp), format)
     return(response)
 
 
