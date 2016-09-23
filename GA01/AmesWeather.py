@@ -7,7 +7,7 @@ import datetime
 import sys
 import re
 
-version = "00.10"
+version = "00.11"
 
 
 def stringToDate(str):
@@ -16,7 +16,8 @@ def stringToDate(str):
         newDate = datetime.datetime.strptime(str, format)
         return newDate
     except ValueError as e:
-        raise ValueError('Invalid date format. Type --help for help. : {0}'.format(e))
+        print('Invalid format. Type --help for help.')
+        sys.exit()
 
 
 def dateToTimeStamp(dt):
@@ -115,6 +116,17 @@ def t(raw, type, format, wdate):
             response = historical.getTemp(str(stamp), format)
     return(response)
 
+
+def printHelp():
+    print("\nAMES WEATHER HELP:\n-------------------\n")
+    print("This program, takes arguments in the following format:")
+    print("AmesWeather (<date> | \"\") (-M | \"\") (measure(-timeoffset | \"\"))\n")
+    print("Measure: { P | T | WS | WD }\nP = pressure\nT = temperature\nWS = wind speed\nWD = wind direction")
+    print("\nTime-offset: {Y | M | W | D}\nY = year\nM = month\nW = week\nD = day")
+    print("\n(Empty \"\" signifies an optional argument)\n")
+    print("Other Commands:\n--help\n--version")
+
+
 def ws(raw, type, format, wdate):
     response = 'N/A'
     if raw == 'WS':
@@ -173,13 +185,13 @@ s = ''
 wtype = 'current'
 wformat = 'us'
 startingPoint = 1
-wdate = 0
+wdate = datetime.datetime.now()
 
 if len(sys.argv) > 1:
     if sys.argv[1] == '--version':
         print('Running AmesWeather v' + version)
     elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
-        print('Someone should eventually put some help here.')
+        printHelp()
     else:
         # If no help of version command was called,
         # that means it is weather time!
@@ -201,7 +213,7 @@ if len(sys.argv) > 1:
             else:
                 startingPoint = 2
         else:
-            wdate = 0
+            wdate = datetime.datetime.now()
 
         for i in range(startingPoint, len(sys.argv)):
             fun = switcher.get(sys.argv[i], unkown)
