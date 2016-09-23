@@ -72,7 +72,7 @@ def p(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            if stamp > now:
+            if stamp > nowStamp:
                 response = 'N/A'
             else:
                 response = historical.getPressure(stamp, format)
@@ -81,7 +81,7 @@ def p(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        if stamp > now:
+        if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getPressure(stamp, format)
@@ -100,7 +100,7 @@ def t(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            if stamp > now:
+            if stamp > nowStamp:
                 response = 'N/A'
             else:
                 response = historical.getTemp(stamp, format)
@@ -109,7 +109,7 @@ def t(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        if stamp > now:
+        if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getTemp(stamp, format)
@@ -124,7 +124,7 @@ def ws(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            if stamp > now:
+            if stamp > nowStamp:
                 response = 'N/A'
             else:
                 response = historical.getWindSpeed(stamp, format)
@@ -133,7 +133,7 @@ def ws(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        if stamp > now:
+        if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getWindSpeed(stamp, format)
@@ -148,7 +148,7 @@ def wd(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            if stamp > now:
+            if stamp > nowStamp:
                 response = 'N/A'
             else:
                 response = historical.getWindDir(stamp, format)
@@ -157,7 +157,7 @@ def wd(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        if stamp > now:
+        if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getWindDir(stamp, format)
@@ -173,6 +173,7 @@ s = ''
 wtype = 'current'
 wformat = 'us'
 startingPoint = 1
+wdate = 0
 
 if len(sys.argv) > 1:
     if sys.argv[1] == '--version':
@@ -194,7 +195,7 @@ if len(sys.argv) > 1:
             # it is either the date or WRONG
             wtype = 'historical'
             wdate = stringToDate(sys.argv[1])
-            if sys.arv[2] == '-M':
+            if sys.argv[2] == '-M':
                 wformat = 'si'
                 startingPoint = 3
             else:
@@ -202,10 +203,10 @@ if len(sys.argv) > 1:
         else:
             wdate = 0
 
-        for i in range(startingPoint, len(argv)):
-            fun = switcher.get(argv[i], unkown)()
-            s = s + fun(argv[i], wtype, wformat, wdate) + ","
-            if i == len(argv)-1:
+        for i in range(startingPoint, len(sys.argv)):
+            fun = switcher.get(sys.argv[i], unkown)
+            s = s + str(fun(sys.argv[i], wtype, wformat, wdate)) + ","
+            if i == len(sys.argv)-1:
                 s = s[:-1]
         print(s)
 else:
