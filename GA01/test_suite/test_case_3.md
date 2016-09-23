@@ -11,7 +11,7 @@ This Test Case tests the historical data in 01/01/2001 12:12.
 
 2. Command being tested:
 ---------------------------------------
-``` 01/01/2001:12:12 P T WS WD'
+``` '01/01/2001:12:12 P T WS WD'
 ```
   * 01/01/2001:12:12: the specific date and time, we want to test on
   * P: pressure
@@ -26,7 +26,7 @@ We expect the output to be the pressure, temperature, wind speed and wind direct
 -----------------------------------
 ```
 $ python test_script.py
-1015,29.44,0.51,140
+1032.77,13.31,13.68,214
 ```
 
 5. The test is passed
