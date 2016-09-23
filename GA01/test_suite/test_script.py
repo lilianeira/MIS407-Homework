@@ -19,4 +19,13 @@ b = b[:-1]
 # ask python to find path of the Group Assignment folder
 
 os.chdir(b)
-os.system('python AmesWeather.py P T WS WD')
+print('Test 1')
+os.system('python AmesWeather.py -M P T WS WD')
+print('\n\nTest 2')
+os.system('python AmesWeather.py P-D P-W P-M P-Y')
+print('\n\nTest 3')
+os.system('python AmesWeather.py 01/01/2001:12:12 P T WS WD')
+print('\n\nTest 4')
+os.system('python AmesWeather.py 10/100/2001:12:12 P T WS WD')
+print('\n\nTest 5')
+os.system('python AmesWeather.py P T WS WD SDF')
