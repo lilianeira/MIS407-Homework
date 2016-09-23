@@ -7,7 +7,7 @@ import datetime
 import sys
 import re
 
-version = "00.11"
+version = "00.12"
 
 
 def stringToDate(str):
@@ -89,7 +89,7 @@ def p(raw, type, format, wdate):
     return(response)
 
 
-def unkown():
+def unkown(raw, type, format, wdate):
     return('N/A')
 
 def t(raw, type, format, wdate):
