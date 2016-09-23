@@ -1,3 +1,4 @@
+
 import requests
 
 # Weather data format defaults to 'us',

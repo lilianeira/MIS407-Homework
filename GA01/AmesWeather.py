@@ -1,11 +1,11 @@
-# AmesWeather.py
-# Command line interface for current and historical weather in Ames
+"""AmesWeather.py main module. This module takes in a user command from
+the command line and outputs historical weather measurements and if no date
+is specified, it outputs the currenct weather measurements"""
 
 
 from weather import current, historical
 import datetime
 import sys
-import re
 
 version = "00.12"
 
@@ -92,6 +92,7 @@ def p(raw, type, format, wdate):
 def unkown(raw, type, format, wdate):
     return('N/A')
 
+
 def t(raw, type, format, wdate):
     response = 'N/A'
     if raw == 'T':
@@ -121,7 +122,7 @@ def printHelp():
     print("\nAMES WEATHER HELP:\n-------------------\n")
     print("This program, takes arguments in the following format:")
     print("AmesWeather (<date> | \"\") (-M | \"\") (measure(-timeoffset | \"\"))\n")
-    print("Measure: { P | T | WS | WD }\nP = pressure\nT = temperature\nWS = wind speed\nWD = wind direction")
+    print("Measure: { P | T | WS | WD }\nP = pressure\nT = temperature\nWS= wind speed\nWD = wind direction")
     print("\nTime-offset: {Y | M | W | D}\nY = year\nM = month\nW = week\nD = day")
     print("\n(Empty \"\" signifies an optional argument)\n")
     print("Other Commands:\n--help\n--version")
@@ -151,6 +152,7 @@ def ws(raw, type, format, wdate):
             response = historical.getWindSpeed(str(stamp), format)
     return(response)
 
+
 def wd(raw, type, format, wdate):
     response = 'N/A'
     if raw == 'WD':
@@ -176,7 +178,7 @@ def wd(raw, type, format, wdate):
     return(response)
 
 
-switcher = { 'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
+switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
             'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
             'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
             'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
