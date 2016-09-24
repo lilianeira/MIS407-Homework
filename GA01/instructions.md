@@ -1,4 +1,7 @@
-#To run the program, the following commands are provided:
+# Instruction for running AmesWeather simmulation
+These are the instruction for running AmesWeather simulation. The program extracts weather data from openweathermap and provides a command line interface to the program so that it can be integrated into a large data collection system that MegaResearch Inc. are developing.
+
+To run the program, the following commands are provided:
   * Measure: { P | T | WS | WD }
      * P = pressure
      * T = temperature
