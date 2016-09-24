@@ -1,3 +1,5 @@
-# Team assignment work here
+# AmesWeather
 
-You will place your team submission/work here. Also, be sure to edit this README.md file to say something about your project.
+A Command Line Interface written in Python that gives users the ability to lookup current and previous weather information for the City of Ames.
+
+For more information on how to use the program, click [here](instructions.md)!

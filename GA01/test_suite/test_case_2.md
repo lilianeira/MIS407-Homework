@@ -1,7 +1,5 @@
-#test_script
-
 #Test Case: 2
-=============
+
 1.Objective
 -------------------------
 ```os.system('python AmesWeather.py P-D P-W P-M P-Y')
@@ -17,7 +15,7 @@ This Test Case tests the pressure yesterday, last weed, last month, last year.
   * P-M: pressure last month
   * P-Y: pressure last year
 
-  
+
 3. Expected output
 -----------------------------------------
 We expect the output to be somewhere around 1000.

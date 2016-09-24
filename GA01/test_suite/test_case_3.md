@@ -1,8 +1,5 @@
-#test_script
-
-
 #Test Case: 3
-=============
+
 1.
 -----------------------------------------
 ```os.system('python AmesWeather.py 01/01/2001:12:12 P T WS WD')

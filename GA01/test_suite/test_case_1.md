@@ -1,9 +1,5 @@
-#test_script
-
-
-
 #Test Case: 1
-=============
+
 1. Objective
 --------------------------
 ```os.system('python AmesWeather.py -M P T WS WD')

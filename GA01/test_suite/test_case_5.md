@@ -1,10 +1,5 @@
-#test_script
-
-
-
-
 #Test Case: 3
-=============
+
 1.
 -----------------------------------------
 ```os.system('python AmesWeather.py P T WS WD SDF')

@@ -1,4 +1,4 @@
-"""This module provides the historical weather, or weather of a spicified date, from openweathermap API"""
+"""This module provides the historical weather"""
 
 import requests
 
@@ -26,8 +26,8 @@ def _sendRequest(time, lat, lng, format):
     return data
 
 
-# returns all relevant data for specefied time
 def getSnapshot(time, format='us'):
+    """returns all relevant data for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     response = {
         'temp': data['currently']['temperature'],
@@ -39,31 +39,31 @@ def getSnapshot(time, format='us'):
     return response
 
 
-# returns temp for specefied time
 def getTemp(time, format='us'):
+    """returns temp for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     return data['currently']['temperature']
 
 
-# returns wind speed for specefied time
 def getWindSpeed(time, format='us'):
+    """returns wind speed for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     return data['currently']['windSpeed']
 
 
-# returns wind direction for specefied time
 def getWindDir(time, format='us'):
+    """returns wind direction for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     return data['currently']['windBearing']
 
 
-# returns pressure for specefied time
 def getPressure(time, format='us'):
+    """returns pressure for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     return data['currently']['pressure']
 
 
-# returns humidity for specefied time
 def getHumidity(time, format='us'):
+    """# returns humidity for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
     return data['currently']['humidity']

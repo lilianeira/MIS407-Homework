@@ -11,6 +11,7 @@ version = "00.12"
 
 
 def stringToDate(str):
+    """convert a date string to a datetime obj"""
     format = '%m/%d/%Y:%H:%M'
     try:
         newDate = datetime.datetime.strptime(str, format)
@@ -21,12 +22,14 @@ def stringToDate(str):
 
 
 def dateToTimeStamp(dt):
+    """convert a datetime obj to UNIX timestamp"""
     timestamp = dt.timestamp()
     timestamp = int(timestamp)
     return timestamp
 
 
 def dateOffset(dt, type):
+    """offset a date. returns a UNIX timestamp"""
     response = -1
     timeStampTemp = dateToTimeStamp(dt)
     if type == 'W':
@@ -43,6 +46,7 @@ def dateOffset(dt, type):
 
 
 def p(raw, type, format, wdate):
+    """get pressure"""
     response = 'N/A'
     if raw == 'P':
         if type == 'current':
@@ -68,10 +72,12 @@ def p(raw, type, format, wdate):
 
 
 def unkown(raw, type, format, wdate):
+    """handle unknown arguments"""
     return('N/A')
 
 
 def t(raw, type, format, wdate):
+    """get temperature"""
     response = 'N/A'
     if raw == 'T':
         if type == 'current':
@@ -97,9 +103,11 @@ def t(raw, type, format, wdate):
 
 
 def printHelp():
+    """print help information"""
     print("\nAMES WEATHER HELP:\n-------------------\n")
     print("This program, takes arguments in the following format:")
     print("AmesWeather (<date> | \"\") (-M | \"\") (measure(-timeoffset | \"\"))\n")
+    print("Date format: MM/DD/YYYY:HH:MM (HH:MM is 24 hr time)\n")
     print("Measure: { P | T | WS | WD }\nP = pressure\nT = temperature\nWS= wind speed\nWD = wind direction")
     print("\nTime-offset: {Y | M | W | D}\nY = year\nM = month\nW = week\nD = day")
     print("\n(Empty \"\" signifies an optional argument)\n")
@@ -107,6 +115,7 @@ def printHelp():
 
 
 def ws(raw, type, format, wdate):
+    """get wind speed"""
     response = 'N/A'
     if raw == 'WS':
         if type == 'current':
@@ -132,6 +141,7 @@ def ws(raw, type, format, wdate):
 
 
 def wd(raw, type, format, wdate):
+    """get wind direction"""
     response = 'N/A'
     if raw == 'WD':
         if type == 'current':

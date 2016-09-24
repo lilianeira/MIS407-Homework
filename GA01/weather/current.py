@@ -1,5 +1,6 @@
 """This module pulls weather data from openweathermap.
-The weather data format defaults to 'us' but can be optionally set as 'si' """
+The weather data format defaults to 'us'
+but can be optionally set as 'si' """
 
 
 import requests
@@ -15,6 +16,7 @@ _defaultLng = '-93.6319130'
 
 
 def _sendRequest(lat, lng, format):
+    """send request to API"""
     if format == 'us':
         format = 'imperial'
     elif format == 'si':
@@ -32,6 +34,7 @@ def _sendRequest(lat, lng, format):
 
 # returns all relevant data
 def getSnapshot(format='us'):
+    """return snapshot of weather data"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     response = {
         'temp': data['main']['temp'],
@@ -43,31 +46,31 @@ def getSnapshot(format='us'):
     return response
 
 
-# returns temp
 def getTemp(format='us'):
+    """returns temp"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     return data['main']['temp']
 
 
-# returns wind speed
 def getWindSpeed(format='us'):
+    """returns wind speed"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     return data['wind']['speed']
 
 
-# returns wind direction
 def getWindDir(format='us'):
+    """returns wind direction"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     return data['wind']['deg']
 
 
-# returns pressure
 def getPressure(format='us'):
+    """returns pressure"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     return data['main']['pressure']
 
 
-# returns humidity
 def getHumidity(format='us'):
+    """returns humidity"""
     data = _sendRequest(_defaultLat, _defaultLng, format)
     return data['main']['pressure']
