@@ -7,7 +7,7 @@ from weather import current, historical
 import datetime
 import sys
 
-version = "00.12"
+version = "00.13"
 
 
 def stringToDate(str):
