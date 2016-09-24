@@ -1,3 +1,6 @@
+"""This module pulls weather data from openweathermap.
+The weather data format defaults to 'us' but can be optionally set as 'si' """
+
 
 import requests
 

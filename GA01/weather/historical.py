@@ -1,3 +1,5 @@
+"""This module provides the historical weather, or weather of a spicified date, from openweathermap API"""
+
 import requests
 
 # Weather data format defaults to 'us', but
