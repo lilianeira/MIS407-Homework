@@ -10,6 +10,14 @@ import sys
 version = "00.13"
 
 
+def dateToString(date):
+    """convert a date string to a datetime obj"""
+    format = '%m/%d/%Y:%H:%M'
+    newDate = date.strftime(format)
+    return newDate
+
+
+
 def stringToDate(str):
     """convert a date string to a datetime obj"""
     format = '%m/%d/%Y:%H:%M'
@@ -140,7 +148,7 @@ def ws(raw, type, format, wdate):
     return(response)
 
 
-def wd(raw, type, format, wdate):
+def wd(raw, type, format, wdate, isFirst):
     """get wind direction"""
     response = 'N/A'
     if raw == 'WD':
@@ -163,53 +171,64 @@ def wd(raw, type, format, wdate):
             response = 'N/A'
         else:
             response = historical.getWindDir(str(stamp), format)
-    return(response)
-
-
-switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
-            'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
-            'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
-            'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
-
-s = ''
-wtype = 'current'
-wformat = 'us'
-startingPoint = 1
-wdate = datetime.datetime.now()
-
-if len(sys.argv) > 1:
-    if sys.argv[1] == '--version':
-        print('Running AmesWeather v' + version)
-    elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
-        printHelp()
+    if isFirst == 1:
+        dateString = dateToString(wdate)
+        return(dateString+","+response)
     else:
-        # If no help of version command was called,
-        # that means it is weather time!
+        return(response)
 
-        # TODO: Before we can start looping through comands,
-        # we need to figure out which optional
-        # arguments are supplied!
-        if sys.argv[1] == '-M':
-            wformat = 'si'
-            startingPoint = 2
-        elif sys.argv[1] not in switcher:
-            # if the first value here is not in switcher,
-            # it is either the date or WRONG
-            wtype = 'historical'
-            wdate = stringToDate(sys.argv[1])
-            if sys.argv[2] == '-M':
-                wformat = 'si'
-                startingPoint = 3
-            else:
-                startingPoint = 2
+
+def main(txt):
+    switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
+        'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
+        'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
+        'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
+    s = ''
+    wtype = 'current'
+    wformat = 'us'
+    startingPoint = 1
+    wdate = datetime.datetime.now()
+    args = txt.split()
+    rdate = datetime.datetime.now()
+    isFirst = 0
+    if len(args) > 1:
+        if args[1] == '--version':
+            print('Running AmesWeather v' + version)
+        elif args[1] == '--help' or args[1] == '-h':
+            printHelp()
         else:
-            wdate = datetime.datetime.now()
+            # If no help of version command was called,
+            # that means it is weather time!
 
-        for i in range(startingPoint, len(sys.argv)):
-            fun = switcher.get(sys.argv[i], unkown)
-            s = s + str(fun(sys.argv[i], wtype, wformat, wdate)) + ","
-            if i == len(sys.argv)-1:
-                s = s[:-1]
-        print(s)
-else:
-    print('No arguments provided. Type --help for help.')
+            # TODO: Before we can start looping through comands,
+            # we need to figure out which optional
+            # arguments are supplied!
+            if args[1] == '-M':
+                wformat = 'si'
+                startingPoint = 2
+            elif args[1] not in switcher:
+                # if the first value here is not in switcher,
+                # it is either the date or WRONG
+                wtype = 'historical'
+                wdate = stringToDate(args[1])
+                rdate = wdate
+                if args[2] == '-M':
+                    wformat = 'si'
+                    startingPoint = 3
+                else:
+                    startingPoint = 2
+            else:
+                wdate = datetime.datetime.now()
+
+            for i in range(startingPoint, len(args)):
+                fun = switcher.get(args[i], unkown)
+                if i == startingPoint:
+                    isFirst = 1
+                else:
+                    isFirst = 0
+                s = s + str(fun(args[i], wtype, wformat, wdate, isFirst)) + ","
+                if i == len(args)-1:
+                    s = s[:-1]
+            print(s)
+    else:
+        print('No arguments provided. Type --help for help.')
