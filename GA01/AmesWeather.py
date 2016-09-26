@@ -10,6 +10,14 @@ import sys
 version = "00.13"
 
 
+def dateToString(date):
+    """convert a date string to a datetime obj"""
+    format = '%m/%d/%Y:%H:%M'
+    newDate = date.strftime(format)
+    return newDate
+
+
+
 def stringToDate(str):
     """convert a date string to a datetime obj"""
     format = '%m/%d/%Y:%H:%M'
@@ -140,7 +148,7 @@ def ws(raw, type, format, wdate):
     return(response)
 
 
-def wd(raw, type, format, wdate):
+def wd(raw, type, format, wdate, isFirst):
     """get wind direction"""
     response = 'N/A'
     if raw == 'WD':
@@ -163,8 +171,11 @@ def wd(raw, type, format, wdate):
             response = 'N/A'
         else:
             response = historical.getWindDir(str(stamp), format)
-    return(response)
-
+    if (isFirst == 1)
+        dateString = dateToString(wdate)
+        return(dateString+","+response)
+    else:
+        return(response)
 
 
 def main(txt):
@@ -177,8 +188,8 @@ def main(txt):
     wformat = 'us'
     startingPoint = 1
     wdate = datetime.datetime.now()
-
     args = txt.split()
+    rdate = datetime.datetime.now()
     if len(args) > 1:
         if args[1] == '--version':
             print('Running AmesWeather v' + version)
@@ -199,6 +210,7 @@ def main(txt):
                 # it is either the date or WRONG
                 wtype = 'historical'
                 wdate = stringToDate(args[1])
+                rdate = wdate
                 if args[2] == '-M':
                     wformat = 'si'
                     startingPoint = 3
@@ -209,7 +221,11 @@ def main(txt):
 
             for i in range(startingPoint, len(args)):
                 fun = switcher.get(args[i], unkown)
-                s = s + str(fun(args[i], wtype, wformat, wdate)) + ","
+                if i == startingPoint:
+                    isFirst = 1
+                else:
+                    isFirst = 0
+                s = s + str(fun(args[i], wtype, wformat, wdate, isfirst)) + ","
                 if i == len(args)-1:
                     s = s[:-1]
             print(s)
