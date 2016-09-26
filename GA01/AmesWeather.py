@@ -171,7 +171,7 @@ def wd(raw, type, format, wdate, isFirst):
             response = 'N/A'
         else:
             response = historical.getWindDir(str(stamp), format)
-    if (isFirst == 1)
+    if isFirst == 1:
         dateString = dateToString(wdate)
         return(dateString+","+response)
     else:
@@ -190,6 +190,7 @@ def main(txt):
     wdate = datetime.datetime.now()
     args = txt.split()
     rdate = datetime.datetime.now()
+    isFirst = 0
     if len(args) > 1:
         if args[1] == '--version':
             print('Running AmesWeather v' + version)
@@ -225,7 +226,7 @@ def main(txt):
                     isFirst = 1
                 else:
                     isFirst = 0
-                s = s + str(fun(args[i], wtype, wformat, wdate, isfirst)) + ","
+                s = s + str(fun(args[i], wtype, wformat, wdate, isFirst)) + ","
                 if i == len(args)-1:
                     s = s[:-1]
             print(s)
