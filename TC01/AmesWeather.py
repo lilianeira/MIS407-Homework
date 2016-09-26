@@ -6,16 +6,20 @@ is specified, it outputs the currenct weather measurements"""
 from weather import current, historical
 import datetime
 import sys
+import calendar
 
 version = "00.13"
 
 
 def dateToString(date):
-    """convert a date string to a datetime obj"""
+    """turns date obj into a string"""
     format = '%m/%d/%Y:%H:%M'
     newDate = date.strftime(format)
     return newDate
 
+
+def stampToDate(str):
+    return datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=str)
 
 
 def stringToDate(str):
@@ -30,9 +34,8 @@ def stringToDate(str):
 
 def dateToTimeStamp(dt):
     """convert a datetime obj to UNIX timestamp"""
-    timestamp = dt.timestamp()
-    timestamp = int(timestamp)
-    return timestamp
+    response = calendar.timegm(dt.utctimetuple())
+    return response
 
 
 def dateOffset(dt, type):
@@ -62,7 +65,7 @@ def p(raw, type, format, wdate, isFirst):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            wdate = datetime.datetime.fromtimestamp(stamp)
+            wdate = stampToDate(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -72,7 +75,7 @@ def p(raw, type, format, wdate, isFirst):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        wdate = datetime.datetime.fromtimestamp(stamp)
+        wdate = stampToDate(stamp)
 
         if stamp > nowStamp:
             response = 'N/A'
@@ -100,7 +103,7 @@ def t(raw, type, format, wdate, isFirst):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            wdate = datetime.datetime.fromtimestamp(stamp)
+            wdate = stampToDate(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -110,7 +113,7 @@ def t(raw, type, format, wdate, isFirst):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        wdate = datetime.datetime.fromtimestamp(stamp)
+        wdate = stampToDate(stamp)
 
         if stamp > nowStamp:
             response = 'N/A'
@@ -145,7 +148,7 @@ def ws(raw, type, format, wdate, isFirst):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            wdate = datetime.datetime.fromtimestamp(stamp)
+            wdate = stampToDate(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -155,7 +158,7 @@ def ws(raw, type, format, wdate, isFirst):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        wdate = datetime.datetime.fromtimestamp(stamp)
+        wdate = stampToDate(stamp)
         if stamp > nowStamp:
             response = 'N/A'
         else:
@@ -177,7 +180,7 @@ def wd(raw, type, format, wdate, isFirst):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
-            wdate = datetime.datetime.fromtimestamp(stamp)
+            wdate = stampToDate(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -187,7 +190,7 @@ def wd(raw, type, format, wdate, isFirst):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
-        wdate = datetime.datetime.fromtimestamp(stamp)
+        wdate = stampToDate(stamp)
         if stamp > nowStamp:
             response = 'N/A'
         else:
