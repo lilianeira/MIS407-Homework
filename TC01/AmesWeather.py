@@ -25,8 +25,7 @@ def stringToDate(str):
         newDate = datetime.datetime.strptime(str, format)
         return newDate
     except ValueError as e:
-        print('Invalid format. Type --help for help.')
-        sys.exit()
+         return -1
 
 
 def dateToTimeStamp(dt):
@@ -53,7 +52,7 @@ def dateOffset(dt, type):
     return response
 
 
-def p(raw, type, format, wdate):
+def p(raw, type, format, wdate, isFirst):
     """get pressure"""
     response = 'N/A'
     if raw == 'P':
@@ -63,6 +62,7 @@ def p(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
+            wdate = datetime.datetime.fromtimestamp(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -72,11 +72,17 @@ def p(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
+        wdate = datetime.datetime.fromtimestamp(stamp)
+
         if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getPressure(str(stamp), format)
-    return(response)
+    if isFirst == 1:
+        dateString = dateToString(wdate)
+        return(dateString+","+str(response))
+    else:
+        return(response)
 
 
 def unkown(raw, type, format, wdate):
@@ -84,7 +90,7 @@ def unkown(raw, type, format, wdate):
     return('N/A')
 
 
-def t(raw, type, format, wdate):
+def t(raw, type, format, wdate, isFirst):
     """get temperature"""
     response = 'N/A'
     if raw == 'T':
@@ -94,6 +100,7 @@ def t(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
+            wdate = datetime.datetime.fromtimestamp(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -103,11 +110,17 @@ def t(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
+        wdate = datetime.datetime.fromtimestamp(stamp)
+
         if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getTemp(str(stamp), format)
-    return(response)
+    if isFirst == 1:
+        dateString = dateToString(wdate)
+        return(dateString+","+str(response))
+    else:
+        return(response)
 
 
 def printHelp():
@@ -122,7 +135,7 @@ def printHelp():
     print("Other Commands:\n--help\n--version")
 
 
-def ws(raw, type, format, wdate):
+def ws(raw, type, format, wdate, isFirst):
     """get wind speed"""
     response = 'N/A'
     if raw == 'WS':
@@ -132,6 +145,7 @@ def ws(raw, type, format, wdate):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
+            wdate = datetime.datetime.fromtimestamp(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -141,11 +155,16 @@ def ws(raw, type, format, wdate):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
+        wdate = datetime.datetime.fromtimestamp(stamp)
         if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getWindSpeed(str(stamp), format)
-    return(response)
+    if isFirst == 1:
+        dateString = dateToString(wdate)
+        return(dateString+","+str(response))
+    else:
+        return(response)
 
 
 def wd(raw, type, format, wdate, isFirst):
@@ -158,6 +177,7 @@ def wd(raw, type, format, wdate, isFirst):
             now = datetime.datetime.now()
             nowStamp = dateToTimeStamp(now)
             stamp = dateToTimeStamp(wdate)
+            wdate = datetime.datetime.fromtimestamp(stamp)
             if stamp > nowStamp:
                 response = 'N/A'
             else:
@@ -167,13 +187,14 @@ def wd(raw, type, format, wdate, isFirst):
         now = datetime.datetime.now()
         nowStamp = dateToTimeStamp(now)
         stamp = dateOffset(wdate, offsetType)
+        wdate = datetime.datetime.fromtimestamp(stamp)
         if stamp > nowStamp:
             response = 'N/A'
         else:
             response = historical.getWindDir(str(stamp), format)
     if isFirst == 1:
         dateString = dateToString(wdate)
-        return(dateString+","+response)
+        return(dateString+","+str(response))
     else:
         return(response)
 
@@ -211,6 +232,9 @@ def main(txt):
                 # it is either the date or WRONG
                 wtype = 'historical'
                 wdate = stringToDate(args[1])
+                if wdate == -1:
+                    print('Date Format Error.')
+                    return
                 rdate = wdate
                 if args[2] == '-M':
                     wformat = 'si'

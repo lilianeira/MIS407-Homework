@@ -42,28 +42,43 @@ def getSnapshot(time, format='us'):
 def getTemp(time, format='us'):
     """returns temp for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    return data['currently']['temperature']
-
+    try:
+        return data['currently']['temperature']
+    except:
+        return 'N/A'
+        
 
 def getWindSpeed(time, format='us'):
     """returns wind speed for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    return data['currently']['windSpeed']
+    try:
+        return data['currently']['windSpeed']
+    except:
+        return 'N/A'
 
 
 def getWindDir(time, format='us'):
     """returns wind direction for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    return data['currently']['windBearing']
+    try:
+        return data['currently']['windBearing']
+    except:
+        return 'N/A'
 
 
 def getPressure(time, format='us'):
     """returns pressure for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    return data['currently']['pressure']
+    try:
+        return data['currently']['pressure']
+    except:
+        return 'N/A'
 
 
 def getHumidity(time, format='us'):
     """# returns humidity for specefied time"""
     data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    return data['currently']['humidity']
+    try:
+        return data['currently']['humidity']
+    except:
+        return 'N/A'
