@@ -166,19 +166,18 @@ def wd(raw, type, format, wdate):
     return(response)
 
 
-switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
-            'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
-            'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
-            'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
-
-s = ''
-wtype = 'current'
-wformat = 'us'
-startingPoint = 1
-wdate = datetime.datetime.now()
-
 
 def main(txt):
+    switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
+        'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
+        'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
+        'WD': wd, 'WD-Y': wd, 'WD-M': wd, 'WD-W': wd, 'WD-D': wd}
+    s = ''
+    wtype = 'current'
+    wformat = 'us'
+    startingPoint = 1
+    wdate = datetime.datetime.now()
+
     args = txt.split()
     if len(args) > 1:
         if args[1] == '--version':
