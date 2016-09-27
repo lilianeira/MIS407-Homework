@@ -255,6 +255,6 @@ def main(args):
                 s = s + str(fun(args[i], wtype, wformat, wdate, isFirst)) + ","
                 if i == len(args)-1:
                     s = s[:-1]
-            print(s)
+            return s
     else:
         print('No arguments provided. Type --help for help.')
