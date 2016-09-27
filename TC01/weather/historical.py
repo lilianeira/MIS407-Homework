@@ -62,7 +62,7 @@ def getSnapshot(time, format='us'):
 def getTemp(time, format='us'):
     """returns temp for specefied time"""
     if time in _data:
-        return data['temp']
+        return _data[time]['temp']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -74,7 +74,7 @@ def getTemp(time, format='us'):
 def getWindSpeed(time, format='us'):
     """returns wind speed for specefied time"""
     if time in _data:
-        return data['windSpeed']
+        return _data[time]['windSpeed']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -86,7 +86,7 @@ def getWindSpeed(time, format='us'):
 def getWindDir(time, format='us'):
     """returns wind direction for specefied time"""
     if time in _data:
-        return data['windDir']
+        return _data[time]['windDir']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -98,7 +98,7 @@ def getWindDir(time, format='us'):
 def getPressure(time, format='us'):
     """returns pressure for specefied time"""
     if time in _data:
-        return data['pressure']
+        return _data[time]['pressure']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
