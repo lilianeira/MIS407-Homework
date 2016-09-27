@@ -15,7 +15,8 @@ _defaultLng = '-93.6319130'
 
 # Store session data here to lower
 # amount of requests required (potentially)
-_data = {}
+_dataUS = {}
+_dataSI = {}
 
 
 def _sendRequest(time, lat, lng, format):
@@ -42,7 +43,10 @@ def _sendRequest(time, lat, lng, format):
             'windDir': 'N/A',
             'pressure': 'N/A'
         }
-    _data[time] = snapshot
+    if format == 'us':
+        _dataUS[time] = snapshot
+    else:
+        _dataSI[time] = snapshot
     return data
 
 
@@ -61,8 +65,12 @@ def getSnapshot(time, format='us'):
 
 def getTemp(time, format='us'):
     """returns temp for specefied time"""
-    if time in _data:
-        return _data[time]['temp']
+    if format == 'us':
+        helperDict = _dataUS
+    else:
+        helperDict = _dataSI
+    if time in helperDict:
+        return helperDict[time]['temp']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -73,8 +81,12 @@ def getTemp(time, format='us'):
 
 def getWindSpeed(time, format='us'):
     """returns wind speed for specefied time"""
-    if time in _data:
-        return _data[time]['windSpeed']
+    if format == 'us':
+        helperDict = _dataUS
+    else:
+        helperDict = _dataSI
+    if time in helperDict:
+        return helperDict[time]['windSpeed']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -85,8 +97,12 @@ def getWindSpeed(time, format='us'):
 
 def getWindDir(time, format='us'):
     """returns wind direction for specefied time"""
-    if time in _data:
-        return _data[time]['windDir']
+    if format == 'us':
+        helperDict = _dataUS
+    else:
+        helperDict = _dataSI
+    if time in helperDict:
+        return helperDict[time]['windDir']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
@@ -97,8 +113,12 @@ def getWindDir(time, format='us'):
 
 def getPressure(time, format='us'):
     """returns pressure for specefied time"""
-    if time in _data:
-        return _data[time]['pressure']
+    if format == 'us':
+        helperDict = _dataUS
+    else:
+        helperDict = _dataSI
+    if time in helperDict:
+        return helperDict[time]['pressure']
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
