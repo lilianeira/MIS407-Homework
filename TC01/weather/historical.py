@@ -13,6 +13,11 @@ _defaultLat = '42.0307810'
 _defaultLng = '-93.6319130'
 
 
+# Store session data here to lower
+# amount of requests required (potentially)
+_data = {}
+
+
 def _sendRequest(time, lat, lng, format):
     r = requests.get(
         'https://api.forecast.io/forecast/' +
@@ -23,6 +28,21 @@ def _sendRequest(time, lat, lng, format):
         '?units='+format
         )
     data = r.json()
+    try:
+        snapshot = {
+            'temp': data['currently']['temperature'],
+            'windSpeed': data['currently']['windSpeed'],
+            'windDir': data['currently']['windBearing'],
+            'pressure': data['currently']['pressure']
+        }
+    except:
+        snapshot = {
+            'temp': 'N/A',
+            'windSpeed': 'N/A',
+            'windDir': 'N/A',
+            'pressure': 'N/A'
+        }
+    _data[time] = snapshot
     return data
 
 
@@ -41,44 +61,47 @@ def getSnapshot(time, format='us'):
 
 def getTemp(time, format='us'):
     """returns temp for specefied time"""
-    data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    try:
-        return data['currently']['temperature']
-    except:
-        return 'N/A'
-        
+    if time in _data:
+        return data['temp']
+    else:
+        data = _sendRequest(time, _defaultLat, _defaultLng, format)
+        try:
+            return data['currently']['temperature']
+        except:
+            return 'N/A'
+
 
 def getWindSpeed(time, format='us'):
     """returns wind speed for specefied time"""
-    data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    try:
-        return data['currently']['windSpeed']
-    except:
-        return 'N/A'
+    if time in _data:
+        return data['windSpeed']
+    else:
+        data = _sendRequest(time, _defaultLat, _defaultLng, format)
+        try:
+            return data['currently']['windSpeed']
+        except:
+            return 'N/A'
 
 
 def getWindDir(time, format='us'):
     """returns wind direction for specefied time"""
-    data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    try:
-        return data['currently']['windBearing']
-    except:
-        return 'N/A'
+    if time in _data:
+        return data['windDir']
+    else:
+        data = _sendRequest(time, _defaultLat, _defaultLng, format)
+        try:
+            return data['currently']['windBearing']
+        except:
+            return 'N/A'
 
 
 def getPressure(time, format='us'):
     """returns pressure for specefied time"""
-    data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    try:
-        return data['currently']['pressure']
-    except:
-        return 'N/A'
-
-
-def getHumidity(time, format='us'):
-    """# returns humidity for specefied time"""
-    data = _sendRequest(time, _defaultLat, _defaultLng, format)
-    try:
-        return data['currently']['humidity']
-    except:
-        return 'N/A'
+    if time in _data:
+        return data['pressure']
+    else:
+        data = _sendRequest(time, _defaultLat, _defaultLng, format)
+        try:
+            return data['currently']['pressure']
+        except:
+            return 'N/A'
