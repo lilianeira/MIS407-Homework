@@ -202,7 +202,7 @@ def wd(raw, type, format, wdate, isFirst):
         return(response)
 
 
-def main(txt):
+def main(args):
     switcher = {'P': p, 'P-Y': p, 'P-M': p, 'P-W': p, 'P-D': p,
         'T': t, 'T-Y': t, 'T-M': t, 'T-W': t, 'T-D': t,
         'WS': ws, 'WS-Y': ws, 'WS-M': ws, 'WS-W': ws, 'WS-D': ws,
@@ -212,7 +212,6 @@ def main(txt):
     wformat = 'us'
     startingPoint = 1
     wdate = datetime.datetime.now()
-    args = txt.split()
     rdate = datetime.datetime.now()
     isFirst = 0
     if len(args) > 1:
