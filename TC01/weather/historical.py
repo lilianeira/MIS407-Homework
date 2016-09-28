@@ -34,14 +34,16 @@ def _sendRequest(time, lat, lng, format):
             'temp': data['currently']['temperature'],
             'windSpeed': data['currently']['windSpeed'],
             'windDir': data['currently']['windBearing'],
-            'pressure': data['currently']['pressure']
+            'pressure': data['currently']['pressure'],
+            'time': data['currently']['time']
         }
     except:
         snapshot = {
             'temp': 'N/A',
             'windSpeed': 'N/A',
             'windDir': 'N/A',
-            'pressure': 'N/A'
+            'pressure': 'N/A',
+            'time': 'N/A'
         }
     if format == 'us':
         _dataUS[time] = snapshot
@@ -70,13 +72,13 @@ def getTemp(time, format='us'):
     else:
         helperDict = _dataSI
     if time in helperDict:
-        return helperDict[time]['temp']
+        return {'data': helperDict[time]['temp'], 'time': helperDict[time]['time']}
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
-            return data['currently']['temperature']
+            return {'data': data['currently']['temperature'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getWindSpeed(time, format='us'):
@@ -86,13 +88,13 @@ def getWindSpeed(time, format='us'):
     else:
         helperDict = _dataSI
     if time in helperDict:
-        return helperDict[time]['windSpeed']
+        return {'data': helperDict[time]['windSpeed'], 'time': helperDict[time]['time']}
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
-            return data['currently']['windSpeed']
+            return {'data': data['currently']['windSpeed'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getWindDir(time, format='us'):
@@ -102,13 +104,13 @@ def getWindDir(time, format='us'):
     else:
         helperDict = _dataSI
     if time in helperDict:
-        return helperDict[time]['windDir']
+        return {'data': helperDict[time]['windDir'], 'time': helperDict[time]['time']}
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
-            return data['currently']['windBearing']
+            return {'data': data['currently']['windBearing'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getPressure(time, format='us'):
@@ -118,10 +120,10 @@ def getPressure(time, format='us'):
     else:
         helperDict = _dataSI
     if time in helperDict:
-        return helperDict[time]['pressure']
+        return {'data': helperDict[time]['pressure'], 'time': helperDict[time]['time']}
     else:
         data = _sendRequest(time, _defaultLat, _defaultLng, format)
         try:
-            return data['currently']['pressure']
+            return {'data': data['currently']['pressure'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}

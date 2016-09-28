@@ -51,7 +51,8 @@ def _sendRequest(lat, lng, format):
             'temp': data['currently']['temperature'],
             'windSpeed': data['currently']['windSpeed'],
             'windDir': data['currently']['windBearing'],
-            'pressure': data['currently']['pressure']
+            'pressure': data['currently']['pressure'],
+            'time': data['currently']['time']
         }
         _snapShot[format] = snapshot
         dateobj = datetime.datetime.now()
@@ -61,7 +62,8 @@ def _sendRequest(lat, lng, format):
             'temp': 'N/A',
             'windSpeed': 'N/A',
             'windDir': 'N/A',
-            'pressure': 'N/A'
+            'pressure': 'N/A',
+            'time': 'N/A'
         }
 
     return data
@@ -85,49 +87,49 @@ def getTemp(format='us'):
     """returns temp"""
     timeSince = timeSinceLastRequest(format)
     if timeSince <= 60:
-        return _snapShot[format]['temp']
+        return {'data': _snapShot[format]['temp'], 'time': _snapShot[format]['time']}
     else:
         data = _sendRequest(_defaultLat, _defaultLng, format)
         try:
-            return data['currently']['temperature']
+            return {'data': data['currently']['temperature'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getWindSpeed(format='us'):
     """returns wind speed"""
     timeSince = timeSinceLastRequest(format)
     if timeSince <= 60:
-        return _snapShot[format]['windSpeed']
+        return {'data': _snapShot[format]['windSpeed'], 'time': _snapShot[format]['time']}
     else:
         data = _sendRequest(_defaultLat, _defaultLng, format)
         try:
-            return data['currently']['windSpeed']
+            return {'data': data['currently']['windSpeed'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getWindDir(format='us'):
     """returns wind direction"""
     timeSince = timeSinceLastRequest(format)
     if timeSince <= 60:
-        return _snapShot[format]['windDir']
+        return {'data': _snapShot[format]['windDir'], 'time': _snapShot[format]['time']}
     else:
         data = _sendRequest(_defaultLat, _defaultLng, format)
         try:
-            return data['currently']['windBearing']
+            return {'data': data['currently']['windBearing'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
 
 
 def getPressure(format='us'):
     """returns pressure"""
     timeSince = timeSinceLastRequest(format)
     if timeSince <= 60:
-        return _snapShot[format]['pressure']
+        return {'data': _snapShot[format]['pressure'], 'time': _snapShot[format]['time']}
     else:
         data = _sendRequest(_defaultLat, _defaultLng, format)
         try:
-            return data['currently']['pressure']
+            return {'data': data['currently']['pressure'], 'time': data['currently']['time']}
         except:
-            return 'N/A'
+            return {'data': 'N/A', 'time': 'N/A'}
