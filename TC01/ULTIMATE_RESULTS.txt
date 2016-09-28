@@ -1,0 +1,47 @@
+Assessment Details:
+* Date time of data set is made up (you need to put in the date offered by the data source -- specifying when the data was collected). 
+* Multiple exceptions thrown - errors not being handled appropriately within the module.
+
+Be sure that when you get it to function properly
+* Datetime of data is accurate. You need to put in the date offered by the data source -- specifying when the data was collected. 
+* Data is accurate, or shown as NA if not.
+
+Current assessment 85% of total points. I'll accept an updated submission up until Friday (Sept. 30) at 12 Noon. You updated submission must respond 
+correctly to the supplied testbench.py script. It must also supply details on the data your script will supply - that is, a) what are the data 
+sources (name them), b) supply details on when the data sources are valid (that is, only data past Jan. 1 1996? Or 2008, or other? Supply details 
+on any limitations. 
+
+I'd recommend that you thoroughly review, understand, and run the supplied testbench.py file to ensure that your application runs correctly.
+
+
+The following are the results from a test run of 10 transactions:
+
+
+$ python testbench.py
+>>>Calling with args = ['Amesweather.py', '06/06/1962:02:00', 'T-Y', 'T-W', 'WS-Y']
+>>>Response :  06/06/1961:02:00,77,68,8
+>>>Calling with args = ['Amesweather.py', 'P', 'WS-D', 'WS-W']
+>>>Response :  09/27/2016:17:02,1009.21,13.78,12.05
+>>>Calling with args = ['Amesweather.py', '05/21/1997:10:00', 'T-Y', 'P', 'P-W', 'WS-D', 'T-D', 'P-Y', 'WD-W', 'WS', 'WD-D', 'WS-Y', 'P-D', 'T-W', 'T']
+>>>Response :  05/21/1996:10:00,51.67,1026.83,1004.21,3.9,36.82,1011.5,317,6.42,340,6.2,1021.81,46.25,41.08
+>>>Calling with args = ['Amesweather.py', 'T', 'WS-W', 'P-D', 'WS-Y', 'P-W', 'WD-D']
+>>>Response :  09/27/2016:17:02,73.81,12.05,1019.53,6.46,1018.46,281
+>>>Calling with args = ['Amesweather.py', '01/10/2002:17:00', 'P-Y', 'T-D', 'WS-Y', 'T', 'WS-D', 'WD-Y', 'WD-D', 'WD-W', 'P-D', 'WD', 'P-W', 'WS']
+>>>Response :  01/10/2001:17:00,1018.06,54.23,10.77,37.04,13.16,194,323,209,1008.16,311,1026.74,14.53
+>>>Calling with args = ['Amesweather.py', 'WS-W', 'P-W', 'T-D', 'WD-Y', 'P', 'T-W', 'WS-Y', 'WD', 'P-Y', 'WD-W']
+>>>Response :  09/20/2016:17:02,12.05,1018.46,64.86,201,1009.21,81.27,6.46,282,1013.39,131
+>>>Calling with args = ['Amesweather.py', '07/16/2009:18:00', 'WS', 'WD-W', 'T-W', 'T-Y', 'WD-Y', 'WD', 'T', 'P-W', 'P', 'P-Y', 'T-D', 'WD-D', 'WS-Y', 'P-D']
+>>>Response :  07/16/2009:18:00,10.3,191,63.38,79.82,194,310,73.12,1018.2,1015.5,1018.2,77.95,296,8.56,1016.3
+>>>Calling with args = ['Amesweather.py', 'WD-Y', 'P']
+>>>Response :  09/28/2015:17:02,201,1009.21
+>>>Calling with args = ['Amesweather.py', '03/24/2010:14:00', 'WS-D', 'P', 'T', 'P-Y', 'WS-Y', 'P-W', 'T-W']
+>>>Response :  03/23/2010:14:00,5.87,1017.8,43.87,1001,14.3,1024.5,37.21
+>>>Calling with args = ['Amesweather.py', 'P-Y', 'WS-W', 'WS-Y', 'T-W', 'P-D']
+>>>Response :  09/28/2015:17:02,1013.39,12.05,6.46,81.28,1019.53
+
+
+
+~~~~~~ TOTAL TIME =  13.680216073989868
+
+
+
