@@ -13,8 +13,11 @@ To run the program, the following commands are provided:
       * W = week
       * D = day
 
-## Usage examples
+## Data Source Information
+Using darksky.net api (formerly known as forecast.io) Using this as our data source for both our current and historical weather. The Dark Sky API uses a wide range of data sources, which are aggregated together to provide the most accurate forecast possible for a given location, including the NOAA NEXRAD system and the NOAA's Integrated Surface Database in the United States.
+Please note this data source does not provide any information on the exact time that the data was collected, for this reason our program returns NA. Previous versions of this program returned the date and time that the API claimed their data represented, but the client requested that that data not be returned.
 
+## Usage examples
 To get the temperature for yesterday, last week, last year:
 
 ```$python AmesWeather.py T-D```

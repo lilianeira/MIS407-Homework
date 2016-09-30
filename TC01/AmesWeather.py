@@ -82,7 +82,7 @@ def p(raw, type, format, wdate, isFirst):
         else:
             response = historical.getPressure(str(stamp), format)
     if isFirst == 1:
-        dateString = dateToString(wdate)
+        dateString = 'N/A'
         return(dateString+","+str(response))
     else:
         return(response)
@@ -120,7 +120,7 @@ def t(raw, type, format, wdate, isFirst):
         else:
             response = historical.getTemp(str(stamp), format)
     if isFirst == 1:
-        dateString = dateToString(wdate)
+        dateString = 'N/A'
         return(dateString+","+str(response))
     else:
         return(response)
@@ -164,7 +164,7 @@ def ws(raw, type, format, wdate, isFirst):
         else:
             response = historical.getWindSpeed(str(stamp), format)
     if isFirst == 1:
-        dateString = dateToString(wdate)
+        dateString = 'N/A'
         return(dateString+","+str(response))
     else:
         return(response)
@@ -196,7 +196,7 @@ def wd(raw, type, format, wdate, isFirst):
         else:
             response = historical.getWindDir(str(stamp), format)
     if isFirst == 1:
-        dateString = dateToString(wdate)
+        dateString = 'N/A'
         return(dateString+","+str(response))
     else:
         return(response)
