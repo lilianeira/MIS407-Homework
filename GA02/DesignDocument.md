@@ -3,10 +3,9 @@
 ### Team Ultimate
 ### October 21, 2016
 
--------------------------------------------------------------------------------------------------------
 ### Introduction:
 
-This document will overview Team Ultimate's design for a Slack-based chat bot, CyBot-Ultimate. This document will cover proposed functionality, bot format, development timeline, planned modules and components, and all external data sources that will be utilized.
+This document will provide an overview of Team Ultimate's design for a Slack-based chat bot, CyBot-Ultimate. It will cover proposed functionality, bot format, development timeline, planned modules and components, and all external data sources that will be utilized.
 
 ### Proposed Functionality:
 
@@ -33,7 +32,7 @@ Starterbot in virtualenv will isolate our application dependencies from other Py
 ```
 pip install virtualenv
 Starterbot: virtualenv starterbot
-Acticate the virtualenv: source location of starterbot
+Activate the virtualenv: source location of starterbot
 ```
 
 ### Planned Modules:
@@ -66,11 +65,17 @@ We plan to use the Cyclones.com calandar RSS feed to retrieve the titles and dat
 ### Functionality:
 
 #### Main Bot:
-In the Main Bot Script module, We will use OS system to interact with the inputs that user puts. We will have system to deal with two types of inputs. Those are chatting inputs and technical inputs. Chatting part to make Bot more human. Example: If user puts “Hello” as an input, the module will ask Bot to randomly return either “Hey”, “Hello” or “What’s up”. Technical inputs will ask module to interact with Bus information module, Weather Condition module and also Iowa Sport Schedule Module. If user types “-w T-D”, module will ask Bots to return the temperature of Ames from yesterday in Fahrenheit. The beginning of each input will be the command to tell main module with module we are going to use. In this case, “-w” is the command for Weather Condition. Other than that, we have “-b” for Bus information and also “-s” for Sport Schedule Module. Fuzzy Wizzy package will be used to deal with the typos. If user types”Hallo”, Fuzzy Wizzy should be able to find the closest string in the module, which in this case is “Hello”. However, if the input that user puts is way off than the expected inputs in the module(big distance number returns from Fuzzy Wizzy package), we will randomly print either “I don’t understand what you are saying. Please enter -h for help” or “It is not clear for me. Please enter -h for help”. For the help command, we will have “-h”, “-hw”, “-hs” and “-hb”. “-h” will return the general structure of the bot and how it works. “-hw”, “-hs” and “-hb” will specifically focus on how each technical module works.
+In the Main Bot Script module, We will use the OS system to interact with the inputs that user puts. We will have a system that deals with two types of inputs, chatting inputs and technical inputs. Chatting input system will enable the Bot to be more human. For example, If user enters  “Hello” as an input, the module will ask the Bot to randomly return either “Hey”, “Hello” or “What’s up”.
+
+Technical inputs will ask module to interact with Bus information module, Weather Condition module and also Iowa Sport Schedule Module. If user enters “-w T-D”, module will ask Bots to return Ames temperature from the day before in Fahrenheit. The beginning of each input will be the command to tell main module with module we are going to use. In this case, “-w” is the command for Weather Condition. Other than that, we have “-b” for Bus information and also “-s” for Sport Schedule Module.
+
+Fuzzy Wuzzy package will be used to deal with the typos. If user types ”Hallo”, Fuzzy Wuzzy should be able to find the closest string in the module, which in this case is “Hello”. However, if the input that user enters is way off than the expected inputs in the module (if the distance number returned from Fuzzy Wuzzy package is bigger than our limit), we will print either “I don’t understand what you are saying. Please enter -h for help” or “It is not clear for me. Please enter -h for help”. For the help command, we will have “-h”, “-hw”, “-hs” and “-hb”. “-h” will return the general structure of the bot and how it works. “-hw”, “-hs” and “-hb” will specifically focus on how each technical module works.
 
 #### Bus Information:
+Using the NextBusXMLFeed API, a user will enter the bus stop number, which is used to indicate the location of where the bus will be stopping, and the Bus module will return the next busses that will be arriving at that location including their numbers. It is assumed that the user will get the bus stop number from the location they are trying to get the bus at, however, for testing purposes, we can provide a list of bus stops numbers. The command for this hasn’t been agreed upon as of yet however it will function similarly to help command.
 
 #### Iowa State Sports Schedule:
+Using cyclones.com calendar, we will provide the Iowa State athletics calendar of upcoming games to the user. A user will enter a sport that they want the calendar for, e.g. “basketball”, “baseball”, “gymnastics” etc. and the module will return when the next game will be and who it will be against. Other functionalities that might be added would be the location of that game.
 
 #### Weather conditions:
 The Weather conditions module will take the inputs from main bot. The data will be returned either current or historical data from DarkSky API depending on the inputs. Help section will also be provided.
