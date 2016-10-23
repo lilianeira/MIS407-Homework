@@ -36,12 +36,13 @@ if __name__ == '__main__':
         print("Channels: ")
         for c in channels:
             print(c['name'] + " (" + c['id'] + ")")
+            '''
             detailed_info = channel_info(c['id'])
-            '''
             if detailed_info:
-                print(detailed_info())
+                print(detailed_info)
             '''
-            if c['name'] == 'general':
-                send_message(c['id'], "Hello" + c['name'] + "! It worked!")
+            if c['name'] == 'bots':
+                send_message(c['id'],c)
+                send_message(c['id'], "Hello " + c['name'] + "! It worked!")
     else:
         print("Unable to authenticate.")
