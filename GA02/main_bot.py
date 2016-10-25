@@ -6,7 +6,7 @@ from slackclient import SlackClient
 
 token = "xoxb-91109580036-FRjGcFWSrRUTJHLJ76sLAO4i"
 sc = SlackClient(token)
-token = os.environ.get(token, None)
+
 def list_channels():
     channels_call = sc.api_call("channels.list")
     if channels_call.get('ok'):
@@ -36,11 +36,9 @@ if __name__ == '__main__':
         print("Channels: ")
         for c in channels:
             print(c['name'] + " (" + c['id'] + ")")
-            '''
             detailed_info = channel_info(c['id'])
             if detailed_info:
                 print(detailed_info)
-            '''
             if c['name'] == 'bots':
                 send_message(c['id'],c)
                 send_message(c['id'], "Hello " + c['name'] + "! It worked!")
