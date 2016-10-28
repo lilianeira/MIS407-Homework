@@ -7,34 +7,34 @@ from slackclient import SlackClient
 
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 sc = SlackClient(token)
-version = "00.01"
+version = "00.02"
+
 
 def talk(channel, txt):
     """Talk in slack"""
-    sc.api_call("chat.postMessage", channel= channel, text= txt)
+    sc.api_call("chat.postMessage", channel= channel,
+                text= txt, icon_url="https://avatars.slack-edge.com/2016-10-06/88155519905_6902631a78d89f365321_72.png",
+                username="Cy Bot")
+
 
 # Begin Bot Command Response Functions
-def unknownResponse(data):
+def unknownResponse(ch, txt, data):
     """What to say when there is nothing to say"""
-    txt = data["text"]
-    ch = data["channel"]
     responses = [ "I don't understand what you're saying. Perhaps your sound module is broken?",
                   "I don't know what that means.",
                   "Hmm?"]
     talk(ch, random.choice(responses))
 
 
-def responseHello(data):
+def responseHello(ch, txt, data):
     """A friendly greeting"""
-    txt = data["text"]
-    ch = data["channel"]
     responses = [ "hi!",
                   "hello there!!",
                   "what's up?"]
     talk(ch, random.choice(responses))
 
 
-def responseHelp(data):
+def responseHelp(ch, txt, data):
     """Help response"""
     talk(ch, "hi. I am CYBOT v" + version + ". I am here to help!")
 
@@ -65,20 +65,25 @@ for i in range(0, len(commands)):
 
 def checkResponse(rsp):
     """Check response from slack realtime chat"""
-    if rsp != []:
-        if rsp[0]["type"] == "message" and "user" in rsp[0] and rsp[0]["text"][:5].lower() == "cybot":
-            print(rsp[0])
-            str1 = rsp[0]["text"][5:]
+    for indx in range(0, len(rsp)):
+        if rsp[indx]["type"] == "message" and "user" in rsp[indx] and rsp[indx]["text"][:5].lower() == "cybot":
+            print(rsp[indx])
+            str1 = rsp[indx]["text"][5:]
             bestMatch = process.extractOne(str1, triggerList)
             matchName = bestMatch[0]
             matchScore = bestMatch[1]
+            txt = rsp[indx]["text"]
+            ch = rsp[indx]["channel"]
             if matchScore > 55: # we can probably tweak this.
                 for i in range(0, len(commands)):
                     if commands[i]["trigger"] == matchName:
-                        commands[i]["response"](rsp[0])
+                        commands[i]["response"](ch, txt, rsp[indx])
                         break;
             else:
-                unknownResponse(rsp[0])
+                unknownResponse(ch, txt, rsp[indx])
+        elif rsp[indx]["type"] == "hello":
+            # bot has connected!
+            print("Cybot connected to slack.");
 
 
 if __name__ == "__main__":
