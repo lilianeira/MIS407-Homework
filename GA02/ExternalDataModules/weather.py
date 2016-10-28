@@ -36,15 +36,15 @@ def getSnapshot(tomorrow=False):
     data = _sendRequest(_defaultLat, _defaultLng)
     if tomorrow:
         response = {
-            'min': data['daily']["data"][1]['temperatureMax'],
-            'max': data['daily']["data"][1]['temperatureMin'],
+            'max': int(round(data['daily']["data"][1]['temperatureMax'])),
+            'min': int(round(data['daily']["data"][1]['temperatureMin'])),
             'summary': data['daily']["data"][1]['summary']
         }
     else:
         response = {
-            'temp': data['currently']['temperature'],
+            'temp': int(round(data['currently']['temperature'])),
             'summary': data['currently']['summary'],
-            'min': data['daily']["data"][0]['temperatureMax'],
-            'max': data['daily']["data"][0]['temperatureMin']
+            'max': int(round(data['daily']["data"][0]['temperatureMax'])),
+            'min': int(round(data['daily']["data"][0]['temperatureMin']))
         }
     return response

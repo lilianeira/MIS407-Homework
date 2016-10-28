@@ -57,6 +57,8 @@ extremeTempComments = {
         "According to my calculations, if I could feel temperatures, this would be hot."
     ]
 }
+
+
 def responseCurrentWeather(ch, txt, data):
     """Weather related conversation"""
     currentWeather = weather.getSnapshot()
@@ -72,10 +74,18 @@ def responseCurrentWeather(ch, txt, data):
     talk(ch, response)
 
 
-def responseTomorrowForecase(ch, txt, data):
-    """Responses about tomorrow's forecase"""
+def responseTomorrowForecast(ch, txt, data):
+    """Responses about tomorrow's forecast"""
     forecast = weather.getSnapshot(True)
-
+    high = forecast["max"]
+    low = forecast["min"]
+    cond = forecast["summary"]
+    response = "Tomorrow in Ames, we'll see a high of " + str(high) + "°F and a low of " + str(low) + "°F. " + cond
+    if high >= 90:
+        response = response + " " + random.choice(extremeTempComments["hot"])
+    elif high <= 15:
+        response = response + " " + random.choice(extremeTempComments["cold"])
+    talk(ch, response)
 
 # End Bot Command Response Functions
 
@@ -117,12 +127,33 @@ commands = [
         "response": responseCurrentWeather
     },
     {
+        "trigger": "what is the weather like",
+        "response": responseCurrentWeather
+    },
+    {
         "trigger": "tell me the current weather",
         "response": responseCurrentWeather
     },
     {
         "trigger": "what's the weather right now",
         "response": responseCurrentWeather
+    },
+    # Tomorrow's weather
+    {
+        "trigger": "what's the weather supposed to be tomorrow",
+        "response": responseTomorrowForecast
+    },
+    {
+        "trigger": "what's tomorrow's forecast",
+        "response": responseTomorrowForecast
+    },
+    {
+        "trigger": "what'll it be like tomorrow",
+        "response": responseTomorrowForecast
+    },
+    {
+        "trigger": "what is tomorrow's weather",
+        "response": responseTomorrowForecast
     }
 ]
 
