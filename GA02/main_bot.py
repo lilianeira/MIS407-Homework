@@ -9,7 +9,7 @@ from slackclient import SlackClient
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 botid = "U2L4471DJ"
 sc = SlackClient(token)
-version = "00.02"
+version = "00.03"
 
 
 def talk(channel, txt):
