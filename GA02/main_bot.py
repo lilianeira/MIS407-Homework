@@ -2,7 +2,7 @@
 
 import time
 import random
-from ExternalDataModules import bus
+from ExternalDataModules import bus, weather
 from fuzzywuzzy import process
 from slackclient import SlackClient
 
@@ -27,6 +27,7 @@ def unknownResponse(ch, txt, data):
     talk(ch, random.choice(responses))
 
 
+# Greetings & Help
 def responseHello(ch, txt, data):
     """A friendly greeting"""
     responses = [ "hi!",
@@ -38,6 +39,43 @@ def responseHello(ch, txt, data):
 def responseHelp(ch, txt, data):
     """Help response"""
     talk(ch, "hi. I am CYBOT v" + version + ". I am here to help!")
+
+
+# Weather talk
+extremeTempComments = {
+    "cold": [
+        "Try not to freeze!",
+        "Brrrrrrrrrrrr.",
+        "Perfect weather! (if you're a penguin)",
+        "Good luck with that...",
+        "According to my calculations, if I could feel temperatures, this would be cold."
+    ],
+    "hot": [
+        "I can't go outside, I'd overheat!!!!",
+        "Maybe pack some oven mits for your steering wheel...",
+        "That's H. O. T.",
+        "According to my calculations, if I could feel temperatures, this would be hot."
+    ]
+}
+def responseCurrentWeather(ch, txt, data):
+    """Weather related conversation"""
+    currentWeather = weather.getSnapshot()
+    temp = currentWeather["temp"]
+    high = currentWeather["max"]
+    low = currentWeather["min"]
+    cond = currentWeather["summary"]
+    response = "Right now in Ames, it is " + str(temp) + "°F and " + cond + ". Today we'll see a high of " + str(high) + "°F and a low of " + str(low) + "°F."
+    if high >= 90:
+        response = response + random.choice(extremeTempComments["hot"])
+    elif high <= 15:
+        response = response + random.choice(extremeTempComments["cold"])
+    talk(ch, response)
+
+
+def responseTomorrowForecase(ch, txt, data):
+    """Responses about tomorrow's forecase"""
+    forecast = weather.getSnapshot(True)
+
 
 # End Bot Command Response Functions
 
@@ -56,6 +94,35 @@ commands = [
     {
         "trigger": "who are you",
         "response": responseHelp
+    },
+    {
+        "trigger": "what is your mission",
+        "response": responseHelp
+    },
+    {
+        "trigger": "what can you do",
+        "response": responseHelp
+    },
+    # Current Weather
+    {
+        "trigger": "what's it like outside",
+        "response": responseCurrentWeather
+    },
+    {
+        "trigger": "what is the current weather",
+        "response": responseCurrentWeather
+    },
+    {
+        "trigger": "what are the current conditions",
+        "response": responseCurrentWeather
+    },
+    {
+        "trigger": "tell me the current weather",
+        "response": responseCurrentWeather
+    },
+    {
+        "trigger": "what's the weather right now",
+        "response": responseCurrentWeather
     }
 ]
 
@@ -78,6 +145,7 @@ def checkResponse(rsp):
                 str1 = rsp[indx]["text"][12:]
             if rsp[indx]["user"] == botid:
                 botMentioned = False
+                print("bot taked")
             if botMentioned:
                 print(rsp[indx])
                 bestMatch = process.extractOne(str1, triggerList)
@@ -90,8 +158,8 @@ def checkResponse(rsp):
                         if commands[i]["trigger"] == matchName:
                             commands[i]["response"](ch, txt, rsp[indx])
                             break;
-                        else:
-                            unknownResponse(ch, txt, rsp[indx])
+                else:
+                    unknownResponse(ch, txt, rsp[indx])
         elif rsp[indx]["type"] == "hello":
             # bot has connected!
             print("Cybot connected to slack.");
