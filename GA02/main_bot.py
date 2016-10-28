@@ -7,13 +7,13 @@ from slackclient import SlackClient
 
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 sc = SlackClient(token)
-
+version = "00.01"
 
 def talk(channel, txt):
     """Talk in slack"""
     sc.api_call("chat.postMessage", channel= channel, text= txt)
 
-
+# Begin Bot Command Response Functions
 def unknownResponse(data):
     """What to say when there is nothing to say"""
     txt = data["text"]
@@ -36,7 +36,9 @@ def responseHello(data):
 
 def responseHelp(data):
     """Help response"""
-    talk(ch, "hi. I am CYBOT. I am here to help!")
+    talk(ch, "hi. I am CYBOT v" + version + ". I am here to help!")
+
+# End Bot Command Response Functions
 
 
 commands = [
@@ -70,7 +72,7 @@ def checkResponse(rsp):
             bestMatch = process.extractOne(str1, triggerList)
             matchName = bestMatch[0]
             matchScore = bestMatch[1]
-            if matchScore > 55:
+            if matchScore > 55: # we can probably tweak this.
                 for i in range(0, len(commands)):
                     if commands[i]["trigger"] == matchName:
                         commands[i]["response"](rsp[0])
