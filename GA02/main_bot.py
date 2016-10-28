@@ -2,10 +2,12 @@
 
 import time
 import random
+from ExternalDataModules import bus
 from fuzzywuzzy import process
 from slackclient import SlackClient
 
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
+botid = "U2L4471DJ"
 sc = SlackClient(token)
 version = "00.02"
 
@@ -13,8 +15,7 @@ version = "00.02"
 def talk(channel, txt):
     """Talk in slack"""
     sc.api_call("chat.postMessage", channel= channel,
-                text= txt, icon_url="https://avatars.slack-edge.com/2016-10-06/88155519905_6902631a78d89f365321_72.png",
-                username="Cy Bot")
+                text= txt, as_user="true")
 
 
 # Begin Bot Command Response Functions
@@ -66,21 +67,31 @@ for i in range(0, len(commands)):
 def checkResponse(rsp):
     """Check response from slack realtime chat"""
     for indx in range(0, len(rsp)):
-        if rsp[indx]["type"] == "message" and "user" in rsp[indx] and rsp[indx]["text"][:5].lower() == "cybot":
-            print(rsp[indx])
-            str1 = rsp[indx]["text"][5:]
-            bestMatch = process.extractOne(str1, triggerList)
-            matchName = bestMatch[0]
-            matchScore = bestMatch[1]
-            txt = rsp[indx]["text"]
-            ch = rsp[indx]["channel"]
-            if matchScore > 55: # we can probably tweak this.
-                for i in range(0, len(commands)):
-                    if commands[i]["trigger"] == matchName:
-                        commands[i]["response"](ch, txt, rsp[indx])
-                        break;
-            else:
-                unknownResponse(ch, txt, rsp[indx])
+        if rsp[indx]["type"] == "message" and "user" in rsp[indx]:
+            botMentioned = False
+            str1 = ""
+            if rsp[indx]["text"][:5].lower() == "cybot":
+                botMentioned = True;
+                str1 = rsp[indx]["text"][5:]
+            elif rsp[indx]["text"][:12] == "<@" + botid + ">":
+                botMentioned = True;
+                str1 = rsp[indx]["text"][12:]
+            if rsp[indx]["user"] == botid:
+                botMentioned = False
+            if botMentioned:
+                print(rsp[indx])
+                bestMatch = process.extractOne(str1, triggerList)
+                matchName = bestMatch[0]
+                matchScore = bestMatch[1]
+                txt = rsp[indx]["text"]
+                ch = rsp[indx]["channel"]
+                if matchScore > 55: # we can probably tweak this.
+                    for i in range(0, len(commands)):
+                        if commands[i]["trigger"] == matchName:
+                            commands[i]["response"](ch, txt, rsp[indx])
+                            break;
+                        else:
+                            unknownResponse(ch, txt, rsp[indx])
         elif rsp[indx]["type"] == "hello":
             # bot has connected!
             print("Cybot connected to slack.");
