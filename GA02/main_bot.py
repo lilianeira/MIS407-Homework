@@ -38,7 +38,9 @@ def responseHello(ch, txt, data):
 
 def responseHelp(ch, txt, data):
     """Help response"""
-    talk(ch, "hi. I am CYBOT v" + version + ". I am here to help!")
+    talk(ch, "I am CYBOT v" + version + ". I was programmed " +
+             " to be totally obsessed with bus stops and weather!" +
+             " You should ask me about CyRide... or weather!")
 
 
 # Weather talk
@@ -113,6 +115,10 @@ commands = [
         "trigger": "what can you do",
         "response": responseHelp
     },
+    {
+        "trigger": "help me",
+        "response": responseHelp
+    },
     # Current Weather
     {
         "trigger": "what's it like outside",
@@ -128,6 +134,10 @@ commands = [
     },
     {
         "trigger": "what is the weather like",
+        "response": responseCurrentWeather
+    },
+    {
+        "trigger": "what is the weather",
         "response": responseCurrentWeather
     },
     {
