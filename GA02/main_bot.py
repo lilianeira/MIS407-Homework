@@ -2,9 +2,10 @@
 
 import time
 import random
-from ExternalDataModules import bus, weather
+from ExternalDataModules import bus, weather, sports
 from fuzzywuzzy import process
 from slackclient import SlackClient
+import feedparser
 
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 botid = "U2L4471DJ"
@@ -14,14 +15,14 @@ version = "00.03"
 
 def talk(channel, txt):
     """Talk in slack"""
-    sc.api_call("chat.postMessage", channel= channel,
-                text= txt, as_user="true")
+    sc.api_call("chat.postMessage", channel=channel,
+                text=txt, as_user="true")
 
 
 # Begin Bot Command Response Functions
 def unknownResponse(ch, txt, data):
     """What to say when there is nothing to say"""
-    responses = [ "I don't understand what you're saying. Perhaps your sound module is broken?",
+    responses = ["I don't understand what you're saying. Perhaps your sound module is broken?",
                   "I don't know what that means.",
                   "Hmm?"]
     talk(ch, random.choice(responses))
@@ -30,7 +31,7 @@ def unknownResponse(ch, txt, data):
 # Greetings & Help
 def responseHello(ch, txt, data):
     """A friendly greeting"""
-    responses = [ "hi!",
+    responses = ["hi!",
                   "hello there!!",
                   "what's up?"]
     talk(ch, random.choice(responses))
@@ -89,6 +90,13 @@ def responseTomorrowForecast(ch, txt, data):
         response = response + " " + random.choice(extremeTempComments["cold"])
     talk(ch, response)
 
+# sports talk
+
+
+def responseBasketballM(ch, txt, data):
+    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=4')
+    menBasketballSchedule = sports.feedparserEntry(d)
+    talk(ch, menBasketballSchedule)
 # End Bot Command Response Functions
 
 
@@ -165,12 +173,14 @@ commands = [
         "trigger": "what is tomorrow's weather",
         "response": responseTomorrowForecast
     }
+    {"trigger": "men's basketball schedule", "response": responseBasketballM}
 ]
 
 
 triggerList = []
 for i in range(0, len(commands)):
     triggerList.append(commands[i]["trigger"])
+
 
 def checkResponse(rsp):
     """Check response from slack realtime chat"""
@@ -179,10 +189,10 @@ def checkResponse(rsp):
             botMentioned = False
             str1 = ""
             if rsp[indx]["text"][:5].lower() == "cybot":
-                botMentioned = True;
+                botMentioned = True
                 str1 = rsp[indx]["text"][5:]
             elif rsp[indx]["text"][:12] == "<@" + botid + ">":
-                botMentioned = True;
+                botMentioned = True
                 str1 = rsp[indx]["text"][12:]
             if rsp[indx]["user"] == botid:
                 botMentioned = False
@@ -194,16 +204,16 @@ def checkResponse(rsp):
                 matchScore = bestMatch[1]
                 txt = rsp[indx]["text"]
                 ch = rsp[indx]["channel"]
-                if matchScore > 55: # we can probably tweak this.
+                if matchScore > 55:  # we can probably tweak this.
                     for i in range(0, len(commands)):
                         if commands[i]["trigger"] == matchName:
                             commands[i]["response"](ch, txt, rsp[indx])
-                            break;
+                            break
                 else:
                     unknownResponse(ch, txt, rsp[indx])
         elif rsp[indx]["type"] == "hello":
             # bot has connected!
-            print("Cybot connected to slack.");
+            print("Cybot connected to slack.")
 
 
 if __name__ == "__main__":

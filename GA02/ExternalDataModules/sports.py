@@ -12,7 +12,7 @@ print(uptime.strip())
 print('-------------------------------------------------------------')
 print("\n")
 
-d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=1')
+d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?')
 
 
 def feedparserEntry(parser):
