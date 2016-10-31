@@ -78,6 +78,23 @@ def responseCurrentWeather(ch, txt, data):
     talk(ch, response)
 
 
+def responseNextBus(ch, txt, data):
+    stopnum = txt[-4:]
+    busData = bus.getRouteTimes(stopnum)
+    if len(busData) == 0:
+        talk(ch, "I do not know anything about stop:" + stopnum)
+    else:
+        responsestr = "Arriving at stop " + stopnum + " in the next 15 minutes.\n"
+        for i in range(0, len(busData)):
+            responsestr = responsestr + busData[i]["route"] +": "
+            for e in range(0, len(busData[i]["predictions"])):
+                addition = " bus #" + busData[i]["predictions"][e]["bus"] + " in " + busData[i]["predictions"][e]["min"] + "min"
+                if e != len(busData[i]["predictions"]) - 1:
+                    addition = addition + ","
+                responsestr = responsestr + addition
+            responsestr = responsestr + "\n"
+        talk(ch, responsestr)
+
 def responseTomorrowForecast(ch, txt, data):
     """Responses about tomorrow's forecast"""
     forecast = weather.getSnapshot(True)
@@ -167,6 +184,23 @@ commands = [
     {
         "trigger": "what is tomorrow's weather",
         "response": responseTomorrowForecast
+    },
+    # Next Bus for a Particular Stop?
+    {
+        "trigger": "i'm at stop 1212",
+        "response": responseNextBus
+    },
+    {
+        "trigger": "i am at bus stop 1212",
+        "response": responseNextBus
+    },
+    {
+        "trigger": "what busses are coming to stop 1212",
+        "response": responseNextBus
+    },
+    {
+        "trigger": "what busses can i expect at stop 1212",
+        "response": responseNextBus
     }
 ]
 
