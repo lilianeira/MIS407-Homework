@@ -42,7 +42,9 @@ def responseHelp(ch, txt, data):
     """Help response"""
     talk(ch, "I am CYBOT v" + version + ". I was programmed " +
              " to be totally obsessed with bus stops and weather!" +
-             " You should ask me about CyRide... or weather!")
+             " Try saying one of the following things to me:\n" +
+             "cybot, what's the weather\ncybot, when is the next basketball game" +
+             "\ncybot, what buses are coming to stop 1088")
 
 
 # Weather talk
@@ -97,14 +99,15 @@ def responseNextBus(ch, txt, data):
     stopnum = txt[-4:]
     busData = bus.getRouteTimes(stopnum)
     if len(busData) == 0:
-        talk(ch, "No busses are arriving in the next 15 minutes for stop "
+        talk(ch, "No buses are arriving in the next 15 minutes for stop "
         + stopnum)
     else:
         responsestr = "Arriving at stop " + stopnum + " in the next 15 minutes:\n"
         for i in range(0, len(busData)):
-            responsestr = responsestr + "*" + busData[i]["route"] +":* "
+            responsestr = responsestr + "*" + busData[i]["route"] +"* "
+            responsestr = responsestr + " (" + busData[i]["descrip"] + "):"
             for e in range(0, len(busData[i]["predictions"])):
-                addition = " bus `#" + busData[i]["predictions"][e]["bus"] + "` in " + busData[i]["predictions"][e]["min"] + "min"
+                addition = " `bus #" + busData[i]["predictions"][e]["bus"] + "` in " + busData[i]["predictions"][e]["min"] + "min"
                 if e != len(busData[i]["predictions"]) - 1:
                     addition = addition + ","
                 responsestr = responsestr + addition
@@ -259,11 +262,11 @@ commands = [
         "response": responseNextBus
     },
     {
-        "trigger": "what busses are coming to stop 1212",
+        "trigger": "what buses are coming to stop 1212",
         "response": responseNextBus
     },
     {
-        "trigger": "what busses can i expect at stop 1212",
+        "trigger": "what buses can i expect at stop 1212",
         "response": responseNextBus
     },
     # Iowa State Sports Events Triggers!

@@ -19,18 +19,20 @@ def getRouteTimes(stop):
     for child in tree:
         if child.tag != "Error":
             routeName = child.attrib["routeTitle"]
+            routeDescrip = ""
             predictions = []
             for child2 in child:
+                routeDescrip = child2.attrib["title"]
                 for child3 in child2:
                     if int(child3.attrib["minutes"]) <= 15:
                         predic = {
-                            "sec": child3.attrib["seconds"],
                             "min": child3.attrib["minutes"],
                             "bus": child3.attrib["vehicle"]
                             }
                         predictions.append(predic)
             entry = {
                 "route": routeName,
+                "descrip": routeDescrip,
                 "predictions": predictions
             }
 
