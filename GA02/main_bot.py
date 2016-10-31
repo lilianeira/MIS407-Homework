@@ -5,7 +5,6 @@ import random
 from ExternalDataModules import bus, weather, sports
 from fuzzywuzzy import process
 from slackclient import SlackClient
-import feedparser
 
 token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 botid = "U2L4471DJ"
@@ -91,12 +90,6 @@ def responseTomorrowForecast(ch, txt, data):
     talk(ch, response)
 
 # sports talk
-
-
-def responseBasketballM(ch, txt, data):
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=4')
-    menBasketballSchedule = sports.feedparserEntry(d)
-    talk(ch, menBasketballSchedule)
 # End Bot Command Response Functions
 
 
@@ -173,7 +166,6 @@ commands = [
         "trigger": "what is tomorrow's weather",
         "response": responseTomorrowForecast
     }
-    {"trigger": "men's basketball schedule", "response": responseBasketballM}
 ]
 
 
