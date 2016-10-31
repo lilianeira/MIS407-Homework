@@ -25,7 +25,7 @@ Project contributors by general role. Please note that throughout the course of 
 
 ### Sports Function
 
--Liliane Iragena
+- Liliane Iragena
 
 
 ### Testing

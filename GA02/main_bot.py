@@ -97,7 +97,8 @@ def responseNextBus(ch, txt, data):
     stopnum = txt[-4:]
     busData = bus.getRouteTimes(stopnum)
     if len(busData) == 0:
-        talk(ch, "I do not know anything about stop:" + stopnum)
+        talk(ch, "No busses are arriving in the next 15 minutes for stop "
+        + stopnum)
     else:
         responsestr = "Arriving at stop " + stopnum + " in the next 15 minutes:\n"
         for i in range(0, len(busData)):
