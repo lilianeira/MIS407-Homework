@@ -1,8 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """CyBot Ultimate main module."""
 
 import time
 import random
-from ExternalDataModules import bus, weather, sports
+from ExternalDataModules import bus, weather
 from fuzzywuzzy import process
 from slackclient import SlackClient
 
