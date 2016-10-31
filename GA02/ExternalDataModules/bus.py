@@ -21,12 +21,13 @@ def getRouteTimes(stop):
         predictions = []
         for child2 in child:
             for child3 in child2:
-                predic = {
-                    "sec": child3.attrib["seconds"],
-                    "min": child3.attrib["minutes"],
-                    "bus": child3.attrib["vehicle"]
-                }
-                predictions.append(predic)
+                if int(child3.attrib["minutes"]) <= 15:
+                    predic = {
+                        "sec": child3.attrib["seconds"],
+                        "min": child3.attrib["minutes"],
+                        "bus": child3.attrib["vehicle"]
+                    }
+                    predictions.append(predic)
         entry = {
             "route": routeName,
             "predictions": predictions
