@@ -3,8 +3,6 @@ import xml.etree.ElementTree as ET
 
 agency = 'cyride'
 
-_nextBusXMLAPIKey =
-
 def getRouteTimes(stop):
     r = requests.get(
         'http://webservices.nextbus.com/service/publicXMLFeed?'
@@ -13,5 +11,11 @@ def getRouteTimes(stop):
         '&stopId=' + stop +
         '&useShortTitles=true'
         )
-    data = r.json()
-    return data
+    tree = ET.parse(r)
+    root = tree.getroot()
+    for child in root:
+        print(child.tag, child.attrib)
+    tree.write(busses.xml)
+    return busses.xml
+    #data = r.json()
+    #return data
