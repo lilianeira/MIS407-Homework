@@ -13,5 +13,26 @@ def getRouteTimes(stop):
         '&stopId=' + stop +
         '&useShortTitles=true'
         )
-    data = r.json()
-    return data
+    answers = []
+    tree = ET.fromstring(r.content)
+
+    for child in tree:
+        print(child.attrib)
+        routeName = child.attrib["routeTitle"]
+        predictions = []
+        for child2 in child:
+            for child3 in child2:
+                predic = {
+                    "sec": child3.attrib["seconds"],
+                    "min": child3.attrib["minutes"],
+                    "bus": child3.attrib["vehicle"]
+                }
+                predictions.append(predic)
+        entry = {
+            "route": routeName,
+            "predictions": predictions
+        }
+        print(entry)
+        if len(predictions) > 0:
+            answers.append(entry)
+    return answers
