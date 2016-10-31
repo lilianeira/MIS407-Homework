@@ -17,7 +17,6 @@ def getRouteTimes(stop):
     tree = ET.fromstring(r.content)
 
     for child in tree:
-        print(child.attrib)
         routeName = child.attrib["routeTitle"]
         predictions = []
         for child2 in child:
@@ -32,7 +31,7 @@ def getRouteTimes(stop):
             "route": routeName,
             "predictions": predictions
         }
-        print(entry)
+
         if len(predictions) > 0:
             answers.append(entry)
     return answers
