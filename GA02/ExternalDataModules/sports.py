@@ -24,7 +24,7 @@ def feedparserEntry(parser):
         stamp2 = dateToTimeStamp(newDate)
         if stamp2 >= nowStamp and countr < 4:
             countr = countr + 1
-            strr = strr + post.title + "\n"
+            strr = strr + post.title + " in " + post.ev_location + "\n"
     if countr == 0:
         strr = "No upcoming events for that sport are scheduled at this time."
 
