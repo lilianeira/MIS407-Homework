@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 
 agency = 'cyride'
 
-_nextBusXMLAPIKey = 22
+_nextBusXMLAPIKey =
 
 def getRouteTimes(stop):
     r = requests.get(
