@@ -4,7 +4,7 @@
 
 import time
 import random
-from ExternalDataModules import bus, weather
+from ExternalDataModules import bus, weather, sports
 from fuzzywuzzy import process
 from slackclient import SlackClient
 
@@ -111,6 +111,68 @@ def responseNextBus(ch, txt, data):
             responsestr = responsestr + "\n"
         talk(ch, responsestr)
 
+
+# Sports Talk
+def responseAllSports(ch, txt, data):
+    rstr = sports.AllSports()
+    talk(ch, rstr)
+
+def responseSportsMB(ch, txt, data):
+    rstr = sports.BasketballM()
+    talk(ch, rstr)
+
+def responseSportsWB(ch, txt, data):
+    rstr = sports.BasketballW()
+    talk(ch, rstr)
+
+def responseSportsCC(ch, txt, data):
+    rstr = sports.CrossCountry()
+    talk(ch, rstr)
+
+def responseSportsMG(ch, txt, data):
+    rstr = sports.GolfM()
+    talk(ch, rstr)
+
+def responseSportsWG(ch, txt, data):
+    rstr = sports.GolfW()
+    talk(ch, rstr)
+
+def responseSportsFB(ch, txt, data):
+    rstr = sports.Football()
+    talk(ch, rstr)
+
+def responseSportsWR(ch, txt, data):
+    rstr = sports.Wrestling()
+    talk(ch, rstr)
+
+def responseSportsTF(ch, txt, data):
+    rstr = sports.TrackField()
+    talk(ch, rstr)
+
+def responseSportsSB(ch, txt, data):
+    rstr = sports.Softball()
+    talk(ch, rstr)
+
+def responseSportsGYM(ch, txt, data):
+    rstr = sports.Gymnastics()
+    talk(ch, rstr)
+
+def responseSportsSC(ch, txt, data):
+    rstr = sports.Soccer()
+    talk(ch, rstr)
+
+def responseSportsSW(ch, txt, data):
+    rstr = sports.Swimming()
+    talk(ch, rstr)
+
+def responseSportsTN(ch, txt, data):
+    rstr = sports.Tennis()
+    talk(ch, rstr)
+
+def responseSportsVB(ch, txt, data):
+    rstr = sports.Volleyball()
+    talk(ch, rstr)
+
 # End Bot Command Response Functions
 
 
@@ -203,6 +265,206 @@ commands = [
     {
         "trigger": "what busses can i expect at stop 1212",
         "response": responseNextBus
+    },
+    # Iowa State Sports Events Triggers!
+    # All sports
+    {
+        "trigger": "what iowa state athletics events are coming up",
+        "response": responseAllSports
+    },
+    {
+        "trigger": "what games are coming up",
+        "response": responseAllSports
+    },
+    {
+        "trigger": "what's going on in isu sports",
+        "response": responseAllSports
+    },
+    {
+        "trigger": "what's coming up in sports",
+        "response": responseAllSports
+    },
+    # Men's Basketball
+    {
+        "trigger": "when are the next mens basketball games",
+        "response": responseSportsMB
+    },
+    {
+        "trigger": "when is the next men's basketball game",
+        "response": responseSportsMB
+    },
+    {
+        "trigger": "what's coming up in men's basketball",
+        "response": responseSportsMB
+    },
+    # Woman's basketball
+    {
+        "trigger": "when are the next women's basketball games",
+        "response": responseSportsWB
+    },
+    {
+        "trigger": "when is the next women's basketball game",
+        "response": responseSportsWB
+    },
+    {
+        "trigger": "what's coming up in women's basketball",
+        "response": responseSportsWB
+    },
+    # Cross Country
+    {
+        "trigger": "when is the next cross country meet",
+        "response": responseSportsCC
+    },
+    {
+        "trigger": "when are the next cross country meets",
+        "response": responseSportsCC
+    },
+    {
+        "trigger": "what's coming up in cross country",
+        "response": responseSportsCC
+    },
+    # MEn's Golf
+    {
+        "trigger": "when is the next men's golf tournement",
+        "response": responseSportsMG
+    },
+    {
+        "trigger": "when is the next men's golf competition",
+        "response": responseSportsMG
+    },
+    {
+        "trigger": "what's coming up in men's golf?",
+        "response": responseSportsMG
+    },
+    # Woman's Golf
+    {
+        "trigger": "when is the next women's golf tournement",
+        "response": responseSportsWG
+    },
+    {
+        "trigger": "what is the next women's golf competitiont",
+        "response": responseSportsWG
+    },
+    {
+        "trigger": "what's coming up in women's golf",
+        "response": responseSportsWG
+    },
+    # Football
+    {
+        "trigger": "when are the next football games",
+        "response": responseSportsFB
+    },
+    {
+        "trigger": "when is the next football game",
+        "response": responseSportsFB
+    },
+    {
+        "trigger": "what's coming up in football",
+        "response": responseSportsFB
+    },
+    # Wrestling
+    {
+        "trigger": "when is the next wrestling meet",
+        "response": responseSportsWR
+    },
+    {
+        "trigger": "when are the next wrestling meets",
+        "response": responseSportsWR
+    },
+    {
+        "trigger": "what's coming up in wrestling",
+        "response": responseSportsWR
+    },
+    # Track and Field
+    {
+        "trigger": "when is the next track meet",
+        "response": responseSportsTF
+    },
+    {
+        "trigger": "when are the upcoming track meets",
+        "response": responseSportsTF
+    },
+    {
+        "trigger": "what's coming up in track and field",
+        "response": responseSportsTF
+    },
+    # Softball
+    {
+        "trigger": "when is the next softball game",
+        "response": responseSportsSB
+    },
+    {
+        "trigger": "when are the next softball games",
+        "response": responseSportsSB
+    },
+    {
+        "trigger": "what's coming up in softball",
+        "response": responseSportsSB
+    },
+    # Gymnastics
+    {
+        "trigger": "what in the next gymnastics meet",
+        "response": responseSportsGYM
+    },
+    {
+        "trigger": "when are the next gymnastics meets",
+        "response": responseSportsGYM
+    },
+    {
+        "trigger": "what's coming up in gymnastics",
+        "response": responseSportsGYM
+    },
+    # Soccer
+    {
+        "trigger": "when is the next soccer game",
+        "response": responseSportsSC
+    },
+    {
+        "trigger": "when is the next soccer match",
+        "response": responseSportsSC
+    },
+    {
+        "trigger": "what's coming up in soccer",
+        "response": responseSportsSC
+    },
+    # Swimming
+    {
+        "trigger": "when is the next swim meet",
+        "response": responseSportsSW
+    },
+    {
+        "trigger": "when is the next swimming competition",
+        "response": responseSportsSW
+    },
+    {
+        "trigger": "what's coming up in swimming",
+        "response": responseSportsSW
+    },
+    # Tennis
+    {
+        "trigger": "when is the next tennis match",
+        "response": responseSportsTN
+    },
+    {
+        "trigger": "when is the next tennis game",
+        "response": responseSportsTN
+    },
+    {
+        "trigger": "what's coming up in tennis",
+        "response": responseSportsTN
+    },
+    # Volleyball
+    {
+        "trigger": "when is the next volleyball game",
+        "response": responseSportsVB
+    },
+    {
+        "trigger": "what is the next volleyball match",
+        "response": responseSportsVB
+    },
+    {
+        "trigger": "what's coming up in volleyball",
+        "response": responseSportsVB
     }
 ]
 
