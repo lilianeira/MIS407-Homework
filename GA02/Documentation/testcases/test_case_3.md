@@ -94,3 +94,9 @@ This Test Case will manually test all of the commands used in the sports functio
     - No upcoming events for that sport are scheduled at this time.
   * For volleyball:
     - 11/2 6:30 PM Volleyball vs  West Virginia in Ames, Iowa 11/4 5:00 PM Volleyball at  Texas Tech in Lubbock, Texas 11/9 7:00 PM Volleyball at  Oklahoma in Norman, Okla. 11/12 4:00 PM Volleyball vs  Texas in Ames, Iowa
+
+5. The test is passed
+------------------------------------
+
+  10/31/2016:21:12
+  Version: 00.03
