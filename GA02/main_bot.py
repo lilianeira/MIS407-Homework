@@ -152,18 +152,19 @@ extremeTempComments = {
 def responseCurrentWeather(ch, txt, data):
     """Weather related conversation"""
     currentWeather = weather.today()
-    if Error not in currentWeather:
+    if "Error" not in currentWeather:
         temp = currentWeather["temp"]
         high = currentWeather["max"]
         low = currentWeather["min"]
         cond = currentWeather["summary"]
-        response = "Right now in Ames, it is " + str(temp) +
-        "°F and " + cond + ". Today we'll see a high of " + str(high) +
-        "°F and a low of " + str(low) + "°F."
+        response = "Right now in Ames, it is " + str(temp)
+        response += "°F and " + cond + ". Today we'll see a high of "
+        response += str(high) + "°F "
+        response += "and a low of " + str(low) + "°F."
         if high >= 90:
-            response = response + random.choice(extremeTempComments["hot"])
+            response += " " + random.choice(extremeTempComments["hot"])
         elif high <= 15:
-            response = response + random.choice(extremeTempComments["cold"])
+            response += " " + random.choice(extremeTempComments["cold"])
     else:
         response = "My weather sensors appear to be jammed."
     talk(ch, response)
@@ -172,19 +173,17 @@ def responseCurrentWeather(ch, txt, data):
 def responseTomorrowForecast(ch, txt, data):
     """Responses about tomorrow's forecast"""
     forecast = weather.tomorrow()
-    if Error not in forecast:
+    if "Error" not in forecast:
         high = forecast["max"]
         low = forecast["min"]
         cond = forecast["summary"]
-        response = "Tomorrow in Ames, we'll see a high of " +
-        str(high) + "°F and a low of " +
-        str(low) + "°F. " + cond
+        response = "Tomorrow in Ames, we'll see a high of "
+        response += str(high) + "°F and a low of "
+        response += str(low) + "°F. " + cond
         if high >= 90:
-            response = response + " " +
-            random.choice(extremeTempComments["hot"])
+            response += " " + random.choice(extremeTempComments["hot"])
         elif high <= 15:
-            response = response + " " +
-            random.choice(extremeTempComments["cold"])
+            response += " " + random.choice(extremeTempComments["cold"])
     else:
         response = "My weather sensors appear to be jammed."
     talk(ch, response)
@@ -198,14 +197,14 @@ def responseNextBus(ch, txt, data):
         talk(ch, "No buses are arriving in the next " +
                  "15 minutes for stop " + stopnum)
     else:
-        responsestr = "Arriving at stop " + stopnum +
-        " in the next 15 minutes:\n"
+        responsestr = "Arriving at stop " + stopnum
+        responsestr += " in the next 15 minutes:\n"
         for i in range(0, len(busData)):
             responsestr = responsestr + "*" + busData[i]["route"] + "* "
             responsestr = responsestr + " (" + busData[i]["descrip"] + "):"
             for e in range(0, len(busData[i]["predictions"])):
-                addition = " `bus #" + busData[i]["predictions"][e]["bus"] +
-                "` in " + busData[i]["predictions"][e]["min"] + "min"
+                addition = " `bus #" + busData[i]["predictions"][e]["bus"]
+                addition += "` in " + busData[i]["predictions"][e]["min"] + "min"
                 if e != len(busData[i]["predictions"]) - 1:
                     addition = addition + ","
                 responsestr = responsestr + addition
