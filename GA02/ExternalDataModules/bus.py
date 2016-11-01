@@ -5,6 +5,7 @@ agency = 'cyride'
 
 _nextBusXMLAPIKey = 22
 
+
 def getRouteTimes(stop):
     r = requests.get(
         'http://webservices.nextbus.com/service/publicXMLFeed?'

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """CyBot Ultimate main module."""
 
@@ -23,9 +22,10 @@ def talk(channel, txt):
 # Begin Bot Command Response Functions
 def unknownResponse(ch, txt, data):
     """What to say when there is nothing to say"""
-    responses = ["I don't understand what you're saying. Perhaps your sound module is broken?",
-                  "I don't know what that means.",
-                  "Hmm?"]
+    responses = ["I don't understand what you're saying." +
+                 "Perhaps your sound module is broken?",
+                 "I don't know what that means.",
+                 "Hmm?"]
     talk(ch, random.choice(responses))
 
 
@@ -33,8 +33,8 @@ def unknownResponse(ch, txt, data):
 def responseHello(ch, txt, data):
     """A friendly greeting"""
     responses = ["hi!",
-                  "hello there!!",
-                  "what's up?"]
+                 "hello there!!",
+                 "what's up?"]
     talk(ch, random.choice(responses))
 
 
@@ -43,61 +43,91 @@ def responseHelp(ch, txt, data):
     talk(ch, "I am CYBOT v" + version + ". I was programmed " +
              " to be totally obsessed with bus stops and weather!" +
              " Try saying one of the following things to me:\n" +
-             "cybot, what's the weather\ncybot, when is the next basketball game" +
+             "cybot, what's the weather\ncybot, " +
+             "when is the next basketball game" +
              "\ncybot, what buses are coming to stop 1088\n" +
              "For more help say cybot user manual")
+
 
 def UserManual(ch, txt, data):
     """User Manual"""
     talk(ch, "Welcome to CyBot-Ultimate, here to answer all of you needs" +
-    "regarding life in Ames! " +
-    " Using CyBot-Ultimate on Slack will allow you to find out the weather for " +
-    "the current and next day, check when the next bus is coming to the stop " +
-    "nearest you, find out when the next Cyclone Athletic event is, or just " +
-    "someone to say hi to! \n" +
-    "CyBot can even recognize what you mean to say when you make a typo\n" +
-    "If you need help just say 'cybot help'\n" +
-    "The only stipulation is that 'cybot' must be the first word in the chat\n" +
-    "For more help with weather say 'cybot weather help'\n" +
-    "For more help with sports say 'cybot sports help'\n" +
-    "For more help with the bus schedule say 'cybot bus help'")
+             "regarding life in Ames! " +
+             " Using CyBot-Ultimate on Slack will " +
+             "allow you to find out the weather for " +
+             "the current and next day, check when the " +
+             "next bus is coming to the stop " +
+             "nearest you, find out when the " +
+             "next Cyclone Athletic event is, or just " +
+             "someone to say hi to! \n" +
+             "CyBot can even recognize what you mean " +
+             "to say when you make a typo\n" +
+             "If you need help just say 'cybot help'\n" +
+             "The only stipulation is that 'cybot' must " +
+             "be the first word in the chat\n" +
+             "For more help with weather say 'cybot weather help'\n" +
+             "For more help with sports say 'cybot sports help'\n" +
+             "For more help with the bus schedule say 'cybot bus help'")
+
 
 def WeatherHelp(ch, txt, data):
     """Help with Weather"""
-    talk(ch, "CyBot-Ultimate recognizes several commands to tell you the current " +
-     "weather, the high for the day, the low for the day, and the predictions " +
-      "for the next day, all you have to do is ask\n" +
-      "For today's weather just say 'cybot what is the weather' or " +
-       "'cybot what is it like outside' and it will return the day's forecast!\n" +
-       "For tomorrow's weather just say 'cybot what's tomorrow's forecast' or " +
-        "'cybot what is the weather supposed to be tomorrow' and " +
-        "CyBot-Ultimate will let you know!")
+    talk(ch, "CyBot-Ultimate recognizes several " +
+             "commands to tell you the current " +
+             "weather, the high for the day, the " +
+             "low for the day, and the predictions " +
+             "for the next day, all you have to do is ask\n" +
+             "For today's weather just say 'cybot what is the weather' or " +
+             "'cybot what is it like outside' and it will " +
+             "return the day's forecast!\n" +
+             "For tomorrow's weather just say 'cybot " +
+             "what's tomorrow's forecast' or " +
+             "'cybot what is the weather supposed to be tomorrow' and " +
+             "CyBot-Ultimate will let you know!")
+
+
 def BusHelp(ch, txt, data):
     """Help With Bus"""
-    talk(ch, "CyBot-Ultimate knows everything about CyRide, and is here to make " +
-        "sure you make it to class on time\n" +
-        "Just tell Cybot what stop you are at, and it will let you know each bus " +
-         "that will be arriving at that stop, which route, direction, bus number, " +
-          "and how long until it arrives for every bus that will be arriving in " +
-          "the next 15 minutes.\n"
-          "You can tell Cybot 'cybot I am at stop '(stop number)', or ask " +
-           "'cybot what buses are coming to stop (stop num)' to find out when " +
-           "your next bus will arrive (as long as it is coming in the next " +
-            "15 minutes)")
+    talk(ch, "CyBot-Ultimate knows everything about CyRide, " +
+             "and is here to make " +
+             "sure you make it to class on time\n" +
+             "Just tell Cybot what stop you are at, " +
+             "and it will let you know each bus " +
+             "that will be arriving at that stop, " +
+             "which route, direction, bus number, " +
+             "and how long until it arrives for " +
+             "every bus that will be arriving in " +
+             "the next 15 minutes.\n"
+             "You can tell Cybot 'cybot I am " +
+             "at stop '(stop number)', or ask " +
+             "'cybot what buses are coming to stop " +
+             "(stop num)' to find out when " +
+             "your next bus will arrive (as long as it " +
+             "is coming in the next 15 minutes)")
+
 
 def SportsHelp(ch, txt, data):
     """Help with Sports"""
-    talk(ch, "CyBot-Ultimate is a huge Cyclone sports fan, and wants to make " +
-     "sure you never miss a game!\n" +
-     "If you just want to know what is coming up for Cyclone Sports in general " +
-     "just ask 'cybot what is coming up in sports' and it will let you know the " +
-     "next four events on the calendar.\n" +
-     "CyBot also knows the calendar for each individual sport, just ask " +
-     "'cybot what is coming up in (unique sport)' and it will let you know.\n" +
-     "For the unique sport you can choose from the following: football, " +
-     "men's basketball, women's basketball, track and field, men's cross country, " +
-     "women's cross country, volleyball, softball, tennis, men's golf, "  +
-     "women's golf, wrestling, gymnastics, or soccer.")
+    talk(ch, "CyBot-Ultimate is a huge Cyclone " +
+             "sports fan, and wants to make " +
+             "sure you never miss a game!\n" +
+             "If you just want to know what is coming " +
+             "up for Cyclone Sports in general " +
+             "just ask 'cybot what is coming up in " +
+             "sports' and it will let you know the " +
+             "next four events on the calendar.\n" +
+             "CyBot also knows the calendar for " +
+             "each individual sport, just ask " +
+             "'cybot what is coming up in (unique sport)'" +
+             "and it will let you know.\n" +
+             "For the unique sport you can choose " +
+             "from the following: football, " +
+             "men's basketball, women's basketball, " +
+             "track and field, men's cross country, " +
+             "women's cross country, volleyball, " +
+             "softball, tennis, men's golf, " +
+             "women's golf, wrestling, gymnastics, or soccer.")
+
 
 # Weather talk
 extremeTempComments = {
@@ -106,43 +136,57 @@ extremeTempComments = {
         "Brrrrrrrrrrrr.",
         "Perfect weather! (if you're a penguin)",
         "Good luck with that...",
-        "According to my calculations, if I could feel temperatures, this would be cold."
+        "According to my calculations, if I " +
+        "could feel temperatures, this would be cold."
     ],
     "hot": [
         "I can't go outside, I'd overheat!!!!",
         "Maybe pack some oven mits for your steering wheel...",
         "That's H. O. T.",
-        "According to my calculations, if I could feel temperatures, this would be hot."
+        "According to my calculations, if I could " +
+        "feel temperatures, this would be hot."
     ]
 }
 
 
 def responseCurrentWeather(ch, txt, data):
     """Weather related conversation"""
-    currentWeather = weather.getSnapshot()
-    temp = currentWeather["temp"]
-    high = currentWeather["max"]
-    low = currentWeather["min"]
-    cond = currentWeather["summary"]
-    response = "Right now in Ames, it is " + str(temp) + "°F and " + cond + ". Today we'll see a high of " + str(high) + "°F and a low of " + str(low) + "°F."
-    if high >= 90:
-        response = response + random.choice(extremeTempComments["hot"])
-    elif high <= 15:
-        response = response + random.choice(extremeTempComments["cold"])
+    currentWeather = weather.today()
+    if Error not in currentWeather:
+        temp = currentWeather["temp"]
+        high = currentWeather["max"]
+        low = currentWeather["min"]
+        cond = currentWeather["summary"]
+        response = "Right now in Ames, it is " + str(temp) +
+        "°F and " + cond + ". Today we'll see a high of " + str(high) +
+        "°F and a low of " + str(low) + "°F."
+        if high >= 90:
+            response = response + random.choice(extremeTempComments["hot"])
+        elif high <= 15:
+            response = response + random.choice(extremeTempComments["cold"])
+    else:
+        response = "My weather sensors appear to be jammed."
     talk(ch, response)
 
 
 def responseTomorrowForecast(ch, txt, data):
     """Responses about tomorrow's forecast"""
-    forecast = weather.getSnapshot(True)
-    high = forecast["max"]
-    low = forecast["min"]
-    cond = forecast["summary"]
-    response = "Tomorrow in Ames, we'll see a high of " + str(high) + "°F and a low of " + str(low) + "°F. " + cond
-    if high >= 90:
-        response = response + " " + random.choice(extremeTempComments["hot"])
-    elif high <= 15:
-        response = response + " " + random.choice(extremeTempComments["cold"])
+    forecast = weather.tomorrow()
+    if Error not in forecast:
+        high = forecast["max"]
+        low = forecast["min"]
+        cond = forecast["summary"]
+        response = "Tomorrow in Ames, we'll see a high of " +
+        str(high) + "°F and a low of " +
+        str(low) + "°F. " + cond
+        if high >= 90:
+            response = response + " " +
+            random.choice(extremeTempComments["hot"])
+        elif high <= 15:
+            response = response + " " +
+            random.choice(extremeTempComments["cold"])
+    else:
+        response = "My weather sensors appear to be jammed."
     talk(ch, response)
 
 
@@ -151,15 +195,17 @@ def responseNextBus(ch, txt, data):
     stopnum = txt[-4:]
     busData = bus.getRouteTimes(stopnum)
     if len(busData) == 0:
-        talk(ch, "No buses are arriving in the next 15 minutes for stop "
-        + stopnum)
+        talk(ch, "No buses are arriving in the next " +
+                 "15 minutes for stop " + stopnum)
     else:
-        responsestr = "Arriving at stop " + stopnum + " in the next 15 minutes:\n"
+        responsestr = "Arriving at stop " + stopnum +
+        " in the next 15 minutes:\n"
         for i in range(0, len(busData)):
-            responsestr = responsestr + "*" + busData[i]["route"] +"* "
+            responsestr = responsestr + "*" + busData[i]["route"] + "* "
             responsestr = responsestr + " (" + busData[i]["descrip"] + "):"
             for e in range(0, len(busData[i]["predictions"])):
-                addition = " `bus #" + busData[i]["predictions"][e]["bus"] + "` in " + busData[i]["predictions"][e]["min"] + "min"
+                addition = " `bus #" + busData[i]["predictions"][e]["bus"] +
+                "` in " + busData[i]["predictions"][e]["min"] + "min"
                 if e != len(busData[i]["predictions"]) - 1:
                     addition = addition + ","
                 responsestr = responsestr + addition
@@ -172,57 +218,71 @@ def responseAllSports(ch, txt, data):
     rstr = sports.AllSports()
     talk(ch, rstr)
 
+
 def responseSportsMB(ch, txt, data):
     rstr = sports.BasketballM()
     talk(ch, rstr)
+
 
 def responseSportsWB(ch, txt, data):
     rstr = sports.BasketballW()
     talk(ch, rstr)
 
+
 def responseSportsCC(ch, txt, data):
     rstr = sports.CrossCountry()
     talk(ch, rstr)
+
 
 def responseSportsMG(ch, txt, data):
     rstr = sports.GolfM()
     talk(ch, rstr)
 
+
 def responseSportsWG(ch, txt, data):
     rstr = sports.GolfW()
     talk(ch, rstr)
+
 
 def responseSportsFB(ch, txt, data):
     rstr = sports.Football()
     talk(ch, rstr)
 
+
 def responseSportsWR(ch, txt, data):
     rstr = sports.Wrestling()
     talk(ch, rstr)
+
 
 def responseSportsTF(ch, txt, data):
     rstr = sports.TrackField()
     talk(ch, rstr)
 
+
 def responseSportsSB(ch, txt, data):
     rstr = sports.Softball()
     talk(ch, rstr)
+
 
 def responseSportsGYM(ch, txt, data):
     rstr = sports.Gymnastics()
     talk(ch, rstr)
 
+
 def responseSportsSC(ch, txt, data):
     rstr = sports.Soccer()
     talk(ch, rstr)
+
 
 def responseSportsSW(ch, txt, data):
     rstr = sports.Swimming()
     talk(ch, rstr)
 
+
 def responseSportsTN(ch, txt, data):
     rstr = sports.Tennis()
     talk(ch, rstr)
+
 
 def responseSportsVB(ch, txt, data):
     rstr = sports.Volleyball()
@@ -272,6 +332,10 @@ commands = [
     },
     {
         "trigger": "sports help",
+        "response": SportsHelp
+    },
+    {
+        "trigger": "which sports do you follow",
         "response": SportsHelp
     },
     # Current Weather

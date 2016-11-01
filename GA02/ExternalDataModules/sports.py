@@ -3,7 +3,8 @@ import calendar
 import feedparser
 import datetime
 
-d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?')
+
+feedURL = "http://www.cyclones.com/calendar.ashx/calendar.rss"
 
 
 def dateToTimeStamp(dt):
@@ -32,89 +33,90 @@ def feedparserEntry(parser):
 
 
 def AllSports():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss')
+    d = feedparser.parse(feedURL)
     allsports = feedparserEntry(d)
     return allsports
 
 
 def BasketballM():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=4')
+    d = feedparser.parse(feedURL + '?sport_id=4')
     menBasketballSchedule = feedparserEntry(d)
     return menBasketballSchedule
 
 
 def BasketballW():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=8')
+    d = feedparser.parse(feedURL + '?sport_id=8')
     womenBasketballSchedule = feedparserEntry(d)
     return womenBasketballSchedule
 
 
 def CrossCountry():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=5')
+    d = feedparser.parse(feedURL + '?sport_id=5')
     crossCountry = feedparserEntry(d)
     return crossCountry
 
 
 def GolfM():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=3')
+    d = feedparser.parse(feedURL + '?sport_id=3')
     womenGolf = feedparserEntry(d)
     return womenGolf
 
+
 def GolfW():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=10')
+    d = feedparser.parse(feedURL + '?sport_id=10')
     menGolf = feedparserEntry(d)
     return menGolf
 
 
 def Football():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=1')
+    d = feedparser.parse(feedURL + '?sport_id=1')
     football = feedparserEntry(d)
     return football
 
 
 def Wrestling():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=17')
+    d = feedparser.parse(feedURL + '?sport_id=17')
     wrestling = feedparserEntry(d)
     return wrestling
 
 
 def TrackField():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=6')
+    d = feedparser.parse(feedURL + '?sport_id=6')
     trackField = feedparserEntry(d)
     return trackField
 
 
 def Softball():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=7')
+    d = feedparser.parse(feedURL + '?sport_id=7')
     softball = feedparserEntry(d)
     return softball
 
 
 def Gymnastics():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=11')
+    d = feedparser.parse(feedURL + '?sport_id=11')
     gymnastics = feedparserEntry(d)
     return gymnastics
 
 
 def Soccer():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=12')
+    d = feedparser.parse(feedURL + '?sport_id=12')
     soccer = feedparserEntry(d)
     return soccer
 
 
 def Swimming():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=13')
+    d = feedparser.parse(feedURL + '?sport_id=13')
     swimming = feedparserEntry(d)
     return swimming
 
 
 def Tennis():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=14')
+    d = feedparser.parse(feedURL + '?sport_id=14')
     tennis = feedparserEntry(d)
     return tennis
 
 
 def Volleyball():
-    d = feedparser.parse('http://www.cyclones.com/calendar.ashx/calendar.rss?sport_id=16')
+    d = feedparser.parse(feedURL + '?sport_id=16')
     volleyball = feedparserEntry(d)
     return volleyball

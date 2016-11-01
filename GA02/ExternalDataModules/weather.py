@@ -1,13 +1,8 @@
-"""This module pulls weather data from Dark Sky.
-The weather data format defaults to 'us'
-but can be optionally set as 'si' """
+"""This module pulls weather data from Dark Sky."""
 
 
 import requests
-import datetime
 
-# Weather data format defaults to 'us',
-# but can be optionally set as 'si'
 
 _forecastApiKey = '5e4981d279ea465087d2eec8584e9dcd'
 
@@ -30,21 +25,30 @@ def _sendRequest(lat, lng):
     return data
 
 
-# returns all relevant data
-def getSnapshot(tomorrow=False):
-    """return snapshot of weather data"""
+def tomorrow():
+    """return tomorrow's weather"""
     data = _sendRequest(_defaultLat, _defaultLng)
-    if tomorrow:
+    try:
         response = {
             'max': int(round(data['daily']["data"][1]['temperatureMax'])),
             'min': int(round(data['daily']["data"][1]['temperatureMin'])),
             'summary': data['daily']["data"][1]['summary']
         }
-    else:
+    except:
+        response = {"Error": True}
+    return response
+
+
+def today():
+    """return today's weather"""
+    data = _sendRequest(_defaultLat, _defaultLng)
+    try:
         response = {
             'temp': int(round(data['currently']['temperature'])),
             'summary': data['currently']['summary'],
             'max': int(round(data['daily']["data"][0]['temperatureMax'])),
             'min': int(round(data['daily']["data"][0]['temperatureMin']))
         }
+    except:
+        response = {"Error": True}
     return response
