@@ -328,7 +328,7 @@ commands = [
     },
     # MEn's Golf
     {
-        "trigger": "when is the next men's golf tournement",
+        "trigger": "when is the next men's golf tournament",
         "response": responseSportsMG
     },
     {
@@ -341,7 +341,7 @@ commands = [
     },
     # Woman's Golf
     {
-        "trigger": "when is the next women's golf tournement",
+        "trigger": "when is the next women's golf tournament",
         "response": responseSportsWG
     },
     {
