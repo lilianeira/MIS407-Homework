@@ -44,7 +44,8 @@ This Test Case will manually test all of the commands used in the weather functi
   * when prompted with all of the various current weather commands cybot returned the current weather every time, which read "Right now in Ames, it is 60°F and Partly Cloudy. Today we'll see a high of 62°F and a low of 46°F." at 8:14 pm on Monday October 31st
   * when prompted with the several tomorrow's weather commands, cybot returned tomorrows forecast, which was: Tomorrow in Ames, we'll see a high of 72°F and a low of 50°F. Partly cloudy throughout the day.
 
-  5. The test is passed
-  ------------------------------------
+5. The test is passed
+------------------------------------
+
   10/31/2016:20:16
   Version: 00.03
