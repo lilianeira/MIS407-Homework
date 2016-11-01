@@ -58,10 +58,32 @@ def UserManual(ch, txt, data):
     "CyBot can even recognize what you mean to say when you make a typo\n" +
     "If you need help just say 'cybot help'\n" +
     "The only stipulation is that 'cybot' must be the first word in the chat\n" +
-    "For more help with weather say 'cybot weatherhelp'\n" +
-    "For more help with sports say 'cybot sportshelp'\n" +
-    "For more help with the bus schedule say 'cybot bushelp'")
+    "For more help with weather say 'cybot weather help'\n" +
+    "For more help with sports say 'cybot sports help'\n" +
+    "For more help with the bus schedule say 'cybot bus help'")
 
+def WeatherHelp(ch, txt, data):
+    """Help with Weather"""
+    talk(ch, "CyBot-Ultimate recognizes several commands to tell you the current" +
+     "weather, the high for the day, the low for the day, and the predictions" +
+      "for the next day, all you have to do is ask\n" +
+      "For today's weather just say 'cybot what is the weather' or" +
+       "'cybot what is it like outside' and it will return the day's forecast!\n" +
+       "For tomorrow's weather just say 'cybot what's tomorrow's forecast' or" +
+        "'cybot what is the weather supposed to be tomorrow' and " +
+        "CyBot-Ultimate will let you know!")
+def BusHelp(ch, txt, data):
+    """Help With Bus"""
+    talk(ch, "CyBot-Ultimate knows everything about CyRide, and is here to make" +
+        "sure you make it to class on time\n" +
+        "Just tell Cybot what stop you are at, and it will let you know each bus" +
+         "that will be arriving at that stop, which route, direction, bus number," +
+          "and how long until it arrives for every bus that will be arriving in" +
+          "the next 15 minutes.\n"
+          "You can tell Cybot 'cybot I am at stop '(stop number)', or ask" +
+           "'cybot what buses are coming to stop (stop num)' to find out when" +
+           "your next bus will arrive (as long as it is coming in the next" +
+            "15 minutes)")
 
 # Weather talk
 extremeTempComments = {
@@ -225,6 +247,14 @@ commands = [
     {
         "trigger": "user manual",
         "response": UserManual
+    },
+    {
+        "trigger": "weather help",
+        "response": WeatherHelp
+    },
+    {
+        "trigger": "bus help",
+        "response": BusHelp
     },
     # Current Weather
     {
