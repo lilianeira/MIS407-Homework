@@ -44,7 +44,23 @@ def responseHelp(ch, txt, data):
              " to be totally obsessed with bus stops and weather!" +
              " Try saying one of the following things to me:\n" +
              "cybot, what's the weather\ncybot, when is the next basketball game" +
-             "\ncybot, what buses are coming to stop 1088")
+             "\ncybot, what buses are coming to stop 1088\n" +
+             "For more help say cybot user manual")
+
+def UserManual(ch, txt, data):
+    """User Manual"""
+    talk(ch, "Welcome to CyBot-Ultimate, here to answer all of you needs" +
+    "regarding life in Ames!" +
+    " Using CyBot-Ultimate on Slack will allow you to find out the weather for" +
+    "the current and next day, check when the next bus is coming to the stop" +
+    "nearest you, find out when the next Cyclone Athletic event is, or just" +
+    "someone to say hi to!\n" +
+    "CyBot can even recognize what you mean to say when you make a typo\n" +
+    "If you need help just say 'cybot help'\n" +
+    "The only stipulation is that 'cybot' must be the first word in the chat\n" +
+    "For more help with weather say 'cybot weatherhelp'\n" +
+    "For more help with sports say 'cybot sportshelp'\n" +
+    "For more help with the bus schedule say 'cybot bushelp'")
 
 
 # Weather talk
@@ -205,6 +221,10 @@ commands = [
     {
         "trigger": "help me",
         "response": responseHelp
+    },
+    {
+        "trigger": "user manual",
+        "response": UserManual
     },
     # Current Weather
     {
@@ -491,7 +511,7 @@ def checkResponse(rsp):
                 str1 = rsp[indx]["text"][12:]
             if rsp[indx]["user"] == botid:
                 botMentioned = False
-                print("bot taked")
+                print("bot talked")
             if botMentioned:
                 print(rsp[indx])
                 bestMatch = process.extractOne(str1, triggerList)

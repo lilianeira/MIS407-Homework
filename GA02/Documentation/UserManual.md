@@ -10,7 +10,7 @@
 ### Weather
   * CyBot-Ultimate recognizes several commands to tell you the current weather, the high for the day, the low for the day, and the predictions for the next day, all you have to do is ask
     - For today's weather just say **cybot what is the weather** or **cybot what is it like outside** and it will return the day's forecast!
-    - For tomorrow's weather just say **cybot what's tomorrow's forecast** or **what is the weather supposed to be tomorrow** and CyBot-Ultimate will let you know!
+    - For tomorrow's weather just say **cybot what's tomorrow's forecast** or **cybot what is the weather supposed to be tomorrow** and CyBot-Ultimate will let you know!
 
 ### Bus Stop
   * CyBot-Ultimate knows everything about CyRide, and is here to make sure you make it to class on time
