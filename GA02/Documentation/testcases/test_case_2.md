@@ -26,8 +26,8 @@ This Test Case will manually test all of the commands used in the bus function.
     - 1123: Arriving at stop 1123 in the next 15 minutes: *21 Cardinal*  (Free Circulator/Frederiksen Ct.): `bus #127` in 11min *3 Blue North*  (Mall via Schilletter): `bus #504` in 4min *6B Brown*  (Mall via Somerset to Stange Rd. at Aspen Rd.): `bus #429` in 9min *6A Towers*  (Towers/Campus): `bus #187` in 1min *2 Green East*  (Mall via Ames High School): `bus #1115` in 2min
     - 3923: No buses are arriving in the next 15 minutes for stop 3923
 
-  5. The test is passed
-  ------------------------------------
+5. The test is passed
+------------------------------------
 
-    10/31/2016:20:49
-    Version: 00.03
+  10/31/2016:20:49
+  Version: 00.03

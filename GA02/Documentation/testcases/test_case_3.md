@@ -58,9 +58,39 @@ This Test Case will manually test all of the commands used in the sports functio
 
 3. Expected output
 --------------------------------
-  * For each individual sport command we expect up to the next four events of the requested sport to be given
+  * For each individual sport command we expect up to the next four events of the requested sport to be given. If none are scheduled CyBot will respond "No upcoming events for that sport are scheduled at this time."
   * When a general all sports command is called we expect the next four events of all sports to be given
 
-  
+
 4. Observed output:
 ----------------------------
+  * For all sports commands:
+    - 11/2 2:00 PM Soccer vs  Oklahoma in Kansas City, Mo. 11/2 6:30 PM Volleyball vs  West Virginia in Ames, Iowa 11/3 6:30 PM Football vs  Oklahoma in Ames, Iowa 11/4 7:00 PM Wrestling at  South Dakota State in Brookings, S.D.
+  * For men's basketball:
+    - 11/6 6:00 PM Men's Basketball vs  Sioux Falls (Exhibition) in Ames, Iowa 11/11 7:00 PM Men's Basketball vs  Savannah State in Ames, Iowa 11/14 7:00 PM Men's Basketball vs  Mount St. Mary's (Md.) in Ames, Iowa 11/20 1:00 PM Men's Basketball vs  The Citadel in Ames, Iowa
+  * For women's basketball:
+    - 11/6 1:00 PM Women's Basketball vs  Briar Cliff University (Iowa) in Ames, Iowa 11/11 12:00 PM Women's Basketball vs  UCSB in Ames, Iowa 11/15 7:00 PM Women's Basketball vs  UNI in Ames, Iowa 11/20 6:00 PM Women's Basketball vs  Drake in Ames, Iowa
+  * For cross country:
+    - 11/11 12:00 PM Cross Country vs  NCAA Midwest Regional in Iowa City, Iowa 11/19 11:00 AM Cross Country vs  NCAA Championship in Terre Haute, Ind.
+  * For men's golf:
+    - 1/23 Men's Golf vs  Arizona Intercollegiate in Tucson, Ariz. 1/24 Men's Golf vs  Arizona Intercollegiate in Tucson, Ariz. 2/20 Men's Golf vs  Prestige at PGA West in La Quinta, Calif. 2/21 Men's Golf vs  Prestige at PGA West in La Quinta, Calif.
+  * For women's golf:
+    - 1/29 Women's Golf vs  Northwestern University in West Palm Beach, Calif. 2/5 Women's Golf vs  Central Florida Invitational in Orlando, Fla. 2/6 Women's Golf vs  Central Florida Invitational in Orlando, Fla. 2/7 Women's Golf vs  Central Florida Invitational in Orlando, Fla.
+  * For football:
+    - 11/3 6:30 PM Football vs  Oklahoma in Ames, Iowa 11/12 11:00 AM Football at  Kansas in Lawrence, Kan. 11/19 Football vs  Texas Tech in Ames, Iowa 11/26 Football vs  West Virginia in Ames, Iowa
+  * For wrestling:
+    - 11/4 7:00 PM Wrestling at  South Dakota State in Brookings, S.D. 11/6 2:00 PM Wrestling at  North Dakota State in Fargo, N.D. 11/13 Wrestling vs  Harold Nichols Cyclone Open in Ames, Iowa 11/26 3:00 PM Wrestling at  Northern Colorado in Greeley, Colo.
+  * For track and field:
+    - 1/14 Track and Field at  Hawkeye Challenge in Iowa City, Iowa 1/20 Track and Field at  Power 5 Premier Invitational in Iowa City, Iowa 1/21 Track and Field at  Power 5 Premier Invitational in Iowa City, Iowa 2/3 Track and Field at  Husker Invitational in Lincoln, Neb.
+  * For softball:
+    - No upcoming events for that sport are scheduled at this time.
+  * For gymnastics:
+    - 1/6 6:30 PM Gymnastics vs  Arizona State (Beauty & the Beast) in Ames, Iowa 1/13 6:30 PM Gymnastics vs  Towson in Ames, Iowa 1/13 6:30 PM Gymnastics vs  Wisconsin-Oshkosh in Ames, Iowa 1/21 5:00 PM Gymnastics at  Arizona in Tucson, Ariz.
+  * For soccer:
+    - 11/2 2:00 PM Soccer vs  Oklahoma in Kansas City, Mo.
+  * For swimming:
+    - 11/4 6:00 PM Swimming and Diving at  Texas Christian in Forth Worth, TX 11/17 Swimming and Diving at  Mizzou Invite (Divers Only) in Columbia, Mo. 11/18 Swimming and Diving at  The Big Challenge in Topeka, Kan. 12/2 Swimming and Diving at  Jean Freeman Invite (Divers Only) in Minneapolis, Minn.
+  * For tennis:
+    - No upcoming events for that sport are scheduled at this time.
+  * For volleyball:
+    - 11/2 6:30 PM Volleyball vs  West Virginia in Ames, Iowa 11/4 5:00 PM Volleyball at  Texas Tech in Lubbock, Texas 11/9 7:00 PM Volleyball at  Oklahoma in Norman, Okla. 11/12 4:00 PM Volleyball vs  Texas in Ames, Iowa
