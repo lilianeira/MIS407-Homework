@@ -1,3 +1,7 @@
-# Team assignment work here
+# CyBot-Ultimate
 
-You will place your team submission/work here. Also, be sure to edit this README.md file to say something about your project.
+A slack bot written in Python focused towards providing information to people in Ames. The bot supports CyRide information, weather information, and information on upcoming Iowa State Cyclones athletic events.
+
+For more information on how to interact with the bot, click [here](Documentation/UserManual.md)!
+
+For a more technical overview of the project, read our [intial design document](Documentation/DesignDocument.md).
