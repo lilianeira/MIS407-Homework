@@ -30,4 +30,4 @@ This Test Case will manually test all of the commands used in the bus function.
 ------------------------------------
 
   10/31/2016:20:49
-  Version: 00.03
+  Version: 00.04
