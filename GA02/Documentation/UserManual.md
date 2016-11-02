@@ -6,6 +6,7 @@
     - CyBot can even recognize what you mean to say when you make a typo, so it is here to help you when you need it.
     - If you need help just say **cybot help**
     - The only stipulation is the "cybot" must be the first word in the chat
+      - If you'd prefer, you can also simply @ mention the bot. 
 
 ### Weather
   * CyBot-Ultimate recognizes several commands to tell you the current weather, the high for the day, the low for the day, and the predictions for the next day, all you have to do is ask
