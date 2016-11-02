@@ -129,6 +129,47 @@ def SportsHelp(ch, txt, data):
              "women's golf, wrestling, gymnastics, or soccer.")
 
 
+# Tell me a joke
+def responseJoke(ch, txt, data):
+    """Tells a Great Joke"""
+    jokes = [
+        "A limbo champion walked into a bar.\n\n" +
+        "He was immediately disqualified.",
+        "What's a dog's favorite instrument?\n\n" +
+        "A trombone.",
+        "Why did the high-fiving cat make a terrible DJ?\n\n" +
+        "Because he kept hitting paws.",
+        "Why did the painting go to jail?\n\n" +
+        "It was framed!",
+        "A man walked into a bar and says ouch!",
+        "Why did the football coach shake the vending machine?\n\n" +
+        "Because he needed a quarter back.",
+        "Why did the chicken cross the playground?\n\n" +
+        "To get to the other slide.",
+        "What do you call a dog magician?\n\n" +
+        "A labracadabrador.",
+        "What cheese goes aroud a castle?\n\n" +
+        "Moatzzarella.",
+        "What's a teacher's favorite state?\n\n" +
+        "Pennsylvania.",
+        "Why did the bubble gum cross the road?\n\n" +
+        "Because it was stuck to the chicken's foot.",
+        "Why did the baker go to math class?\n\n" +
+        "He wanted to study pi.",
+        "The past, present, and future walk into a bar.\n\n" +
+        "It was tense.",
+        "What do you call a bunch of rabbits walking backwards?\n\n" +
+        "A receding hare line.",
+        "Baby tomato was falling behind.\n\n" +
+        "Moma tomato said ketchup!",
+        "Music is coming out of the printer!\n\n" +
+        "I think the paper is jamming again...",
+        "What do you call a short fortune teller who's" +
+        " hiding from the police?\n\n A short medium at large."
+    ]
+    talk(ch, random.choice(jokes))
+
+
 # Weather talk
 extremeTempComments = {
     "cold": [
@@ -187,6 +228,11 @@ def responseTomorrowForecast(ch, txt, data):
     else:
         response = "My weather sensors appear to be jammed."
     talk(ch, response)
+
+
+def responsePolo(ch, txt, data):
+    """polo!"""
+    talk(ch, "POLO!")
 
 
 # Bus Talk
@@ -336,6 +382,27 @@ commands = [
     {
         "trigger": "which sports do you follow",
         "response": SportsHelp
+    },
+    {
+        "trigger": "marco",
+        "response": responsePolo
+    },
+    # Great jokes
+    {
+        "trigger": "tell me a joke",
+        "response": responseJoke
+    },
+    {
+        "trigger": "do you know any jokes",
+        "response": responseJoke
+    },
+    {
+        "trigger": "tell me another joke",
+        "response": responseJoke
+    },
+    {
+        "trigger": "say something funny",
+        "response": responseJoke
     },
     # Current Weather
     {
