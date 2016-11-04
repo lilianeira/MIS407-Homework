@@ -3,6 +3,8 @@
 
 import time
 import random
+import os
+import sys
 from ExternalDataModules import bus, weather, sports
 from fuzzywuzzy import process
 from slackclient import SlackClient
@@ -11,6 +13,16 @@ token = "xoxb-88140239460-UWfqbhscm4gOevq48BxwLgBY"
 botid = "U2L4471DJ"
 sc = SlackClient(token)
 version = "00.05"
+
+
+def main():
+    sc = SlackClient(token)
+    if sc.rtm_connect():
+        while True:
+            checkResponse(sc.rtm_read())
+            time.sleep(1)
+    else:
+        print("Connection Failed, bad token?")
 
 
 def talk(channel, txt):
@@ -709,11 +721,34 @@ def checkResponse(rsp):
             print("Cybot connected to slack.")
 
 
-if __name__ == "__main__":
-    sc = SlackClient(token)
-    if sc.rtm_connect():
-        while True:
-            checkResponse(sc.rtm_read())
-            time.sleep(1)
+def check_pid(pid):
+    """ Check For the existence of a pid. """
+    pid = int(pid)
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
     else:
-        print("Connection Failed, bad token?")
+        return True
+
+
+if __name__ == "__main__":
+    pid = str(os.getpid())
+    pidfile = "/tmp/ultimatedaemon.pid"
+    if os.path.isfile(pidfile):
+        # file exists... check if pid stored is running still
+        f = open(pidfile, 'r')
+        str1 = f.readline()
+        f.close()
+        if check_pid(str1) != True:
+            # write new pid to file and run script
+            f = open(pidfile, 'w')
+            f.write(pid)
+            f.close()
+            main()
+    else:
+        # No file exists, write file and run script.
+        f = open(pidfile, 'w')
+        f.write(pid)
+        f.close()
+        main()
