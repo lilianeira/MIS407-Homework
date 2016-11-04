@@ -74,6 +74,8 @@ Fuzzy Wuzzy package will be used to deal with the typos. If user types ”Hallo�
 #### Bus Information:
 Using the NextBusXMLFeed API, a user will enter the bus stop number, which is used to indicate the location of where the bus will be stopping, and the Bus module will return the next busses that will be arriving at that location including their numbers. It is assumed that the user will get the bus stop number from the location they are trying to get the bus at, however, for testing purposes, we can provide a list of bus stops numbers. The command for this hasn’t been agreed upon as of yet however it will function similarly to help command.
 
+To parse the XML document created from the NextBustXMLFeed API, the ElementTree package was imported. ElementTree is a standard package in Python 3.
+
 #### Iowa State Sports Schedule:
 Using cyclones.com calendar, we will provide the Iowa State athletics calendar of upcoming games to the user. A user will enter a sport that they want the calendar for, e.g. “basketball”, “baseball”, “gymnastics” etc. and the module will return when the next game will be and who it will be against. Other functionalities that might be added would be the location of that game.
 

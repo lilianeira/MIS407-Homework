@@ -63,7 +63,7 @@ def responseHelp(ch, txt, data):
 
 def UserManual(ch, txt, data):
     """User Manual"""
-    talk(ch, "Welcome to CyBot-Ultimate, here to answer all of you needs" +
+    talk(ch, "Welcome to CyBot-Ultimate, here to answer all of you needs " +
              "regarding life in Ames! " +
              " Using CyBot-Ultimate on Slack will " +
              "allow you to find out the weather for " +
