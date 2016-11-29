@@ -2,12 +2,28 @@ from tkinter import *
 from tkinter.ttk import *
 import bus
 import sports
-import weather
+import weather as weatherModule
 
 window = Tk()
 
 def weather():
-    weather.today()
+    currentweather = weatherModule.today()
+    temp = currentWeather["temp"]
+    high = currentWeather["max"]
+    low = currentWeather["min"]
+    cond = currentWeather["summary"]
+    response = "Right now in Ames, it is " + str(temp)
+    response += "°F and " + cond + ". Today we'll see a high of "
+    response += str(high) + "°F "
+    response += "and a low of " + str(low) + "°F."
+    if high >= 90:
+        response += " " + random.choice(extremeTempComments["hot"])
+    elif high <= 15:
+        response += " " + random.choice(extremeTempComments["cold"])
+    return response
+#def sports():
+
+#def bus():
 
 
 team = Label(window, text="Ultimate")
@@ -33,4 +49,3 @@ newsbtn = Button(window, text="News", width=12)
 newsbtn.grid(row = 8, column = 1)
 
 window.mainloop()
-#if pressed, update module by requesting new data
