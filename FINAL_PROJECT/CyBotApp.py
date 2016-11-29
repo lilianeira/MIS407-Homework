@@ -1,5 +1,4 @@
 from tkinter import *
-from tkinter.ttk import *
 import bus
 import sports
 import weather as weatherModule
@@ -7,7 +6,7 @@ import weather as weatherModule
 window = Tk()
 
 def weather():
-    currentweather = weatherModule.today()
+    currentWeather = weatherModule.today()
     temp = currentWeather["temp"]
     high = currentWeather["max"]
     low = currentWeather["min"]
@@ -16,14 +15,15 @@ def weather():
     response += "°F and " + cond + ". Today we'll see a high of "
     response += str(high) + "°F "
     response += "and a low of " + str(low) + "°F."
-    if high >= 90:
-        response += " " + random.choice(extremeTempComments["hot"])
-    elif high <= 15:
-        response += " " + random.choice(extremeTempComments["cold"])
     return response
-#def sports():
 
-#def bus():
+def sports():
+    sportinfo = sports.AllSports
+    return sportinfo
+
+def bus(bus_stop):
+    businfo = bus.getRouteTimes(bus_stop)
+    return businfo
 
 
 team = Label(window, text="Ultimate")
@@ -35,7 +35,7 @@ weatherbtn.grid(row = 1, column = 0)
 wthdisp = Listbox(window,height=6, width=35)
 wthdisp.grid(column = 0, row = 2, rowspan = 4)
 
-busbtn = Button(window, text="Bus", width=12)
+busbtn = Button(window, text="Bus Stop (#):", width=12)
 busbtn.grid(row = 1, column = 1)
 
 bus_stop = StringVar()
