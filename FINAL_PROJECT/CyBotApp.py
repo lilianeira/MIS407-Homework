@@ -1,6 +1,6 @@
 from tkinter import *
 import bus
-import sports
+import sports as sportAll
 import weather as weatherModule
 
 window = Tk()
@@ -18,8 +18,8 @@ def weather():
     weatherTxt.set(response)
 
 def sports():
-    sportinfo = sports.AllSports
-    return sportinfo
+    sportinfo = sportAll.AllSports()
+    sportTxt.set(sportinfo)
 
 def bus(bus_stop):
     businfo = bus.getRouteTimes(bus_stop)
@@ -28,6 +28,7 @@ def bus(bus_stop):
 
 def initModules():
     weather()
+    sports()
 
 window.wm_title("ULTIMATE DESKTOP APP")
 
@@ -40,20 +41,24 @@ weatherbtn.grid(row = 1, column = 0)
 weatherTxt = StringVar()
 weatherTxt.set("Hit button to load weather data.")
 wthdisp = Message(window, width=150, padx=10, pady=10, textvariable=weatherTxt, background="white")
-wthdisp.grid(column = 0, row = 2, rowspan = 4)
+wthdisp.grid(column = 0, row = 2, rowspan = 4, columnspan = 32)
 
 busbtn = Button(window, text="Bus Stop (#):", width=12)
-busbtn.grid(row = 1, column = 1)
+busbtn.grid(row = 1, column = 33)
 
 bus_stop = StringVar()
 busentry = Entry(window, textvariable = bus_stop, width = 6)
-busentry.grid(row = 1, column = 2)
+busentry.grid(row = 1, column = 34)
 
-sportbtn = Button(window, text="Sports", width=12)
+sportTxt = StringVar()
+sportTxt.set("Click on Sports to view upcoming sport schedules")
+sportbtn = Button(window, text="Sports", width=12, command = sports)
 sportbtn.grid(row = 8, column = 0)
+sportdisp = Message(window, width=150, padx=10, pady=10, textvariable=sportTxt, background="white")
+sportdisp.grid(column = 0, row = 9, rowspan = 12, columnspan = 32)
 
 newsbtn = Button(window, text="News", width=12)
-newsbtn.grid(row = 8, column = 1)
+newsbtn.grid(row = 8, column = 33)
 
 window.mainloop()
 
