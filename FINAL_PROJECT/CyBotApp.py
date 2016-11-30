@@ -27,7 +27,7 @@ def weather():
         cond = forecast["summary"]
         response = "Tomorrow in Ames, we'll see a high of "
         response += str(high) + "°F and a low of "
-        response += str(low) + "°F. " + cond
+        response += str(low) + "°F.\n\n" + cond
     wthdisp.delete(1.0, END)
     wthdisp.insert(END, response)
 
