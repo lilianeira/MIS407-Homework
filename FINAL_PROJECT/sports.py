@@ -36,6 +36,8 @@ def getSports(sport):
         response = AllSports()
     elif sport == "Men's Basketball":
         response = BasketballM()
+    elif sport == "Woman's Basketball":
+        response = BasketballM()
     elif sport == "Cross Country":
         response = CrossCountry()
     elif sport == "Men's Golf":
