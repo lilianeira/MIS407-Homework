@@ -2,6 +2,7 @@ from tkinter import *
 import bus as busStop
 import sports as sportAll
 import weather as weatherModule
+import News as newsFeed
 
 window = Tk()
 
