@@ -25,12 +25,42 @@ def feedparserEntry(parser):
         stamp2 = dateToTimeStamp(newDate)
         if stamp2 >= nowStamp and countr < 4:
             countr = countr + 1
-            strr = strr + post.title + " in " + post.ev_location + "\n"
+            strr = strr + post.title + " in " + post.ev_location + "\n\n"
     if countr == 0:
         strr = "No upcoming events for that sport are scheduled at this time."
 
     return strr
 
+def getSports(sport):
+    if sport == "all":
+        response = AllSports()
+    elif sport == "Men's Basketball":
+        response = BasketballM()
+    elif sport == "Cross Country":
+        response = CrossCountry()
+    elif sport == "Men's Golf":
+        response = GolfM()
+    elif sport == "Woman's Golf":
+        response = GolfW()
+    elif sport == "Football":
+        response = Football()
+    elif sport == "Wrestling":
+        response = Wrestling()
+    elif sport == "Track and Field":
+        response = TrackField()
+    elif sport == "Softball":
+        response = Softball()
+    elif sport == "Gymnastics":
+        response = Gymnastics()
+    elif sport == "Soccer":
+        response = Soccer()
+    elif sport == "Swimming":
+        response = Swimming()
+    elif sport == "Tennis":
+        response = Tennis()
+    elif sport == "Volleyball":
+        response = Volleyball()
+    return response
 
 def AllSports():
     d = feedparser.parse(feedURL)
