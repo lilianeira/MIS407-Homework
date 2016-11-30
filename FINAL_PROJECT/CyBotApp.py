@@ -31,18 +31,18 @@ def bus():
     if len(busData) == 0:
         responsestr = "No buses are arriving in the next 15 minutes for stop " + stopNum;
     else:
-        responsestr = "Arriving at stop " + stopnum
-        responsestr += " in the next 15 minutes:\n"
+        responsestr = "Stop " + stopNum
+        responsestr += " in next 15 minutes:\n\n"
         for i in range(0, len(busData)):
-            responsestr = responsestr + "*" + busData[i]["route"] + "* "
-            responsestr = responsestr + " (" + busData[i]["descrip"] + "):"
+            responsestr = responsestr + "" + busData[i]["route"] + " "
+            responsestr = responsestr + " (" + busData[i]["descrip"] + "):\n"
             for e in range(0, len(busData[i]["predictions"])):
-                addition = " `bus #" + busData[i]["predictions"][e]["bus"]
-                addition += "` in " + busData[i]["predictions"][e]["min"] + "min"
+                addition = " bus #" + busData[i]["predictions"][e]["bus"]
+                addition += " in " + busData[i]["predictions"][e]["min"] + "min"
                 if e != len(busData[i]["predictions"]) - 1:
                     addition = addition + ","
                 responsestr = responsestr + addition
-            responsestr = responsestr + "\n"
+            responsestr = responsestr + "\n\n"
     busdisp.delete(1.0, END)
     busdisp.insert(END, responsestr)
 
