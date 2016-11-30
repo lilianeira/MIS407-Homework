@@ -2,6 +2,7 @@ from tkinter import *
 import bus as busStop
 import weather as weatherModule
 import News as newsFeed
+import webbrowser
 import sports as Sports
 
 version = "00.05"
@@ -60,10 +61,29 @@ def bus():
     busdisp.delete(1.0, END)
     busdisp.insert(END, responsestr)
 
+
+def news():
+    theNews = newsFeed.newsPlease()
+    newsdisp.delete(1.0, END)
+    if len(theNews):
+        for i in range(0, len(theNews)):
+            newsdisp.insert(END, theNews[i]["title"] + "\n")
+            newsdisp.insert(END, theNews[i]["link"], "hlink")
+            newsdisp.insert(END, "\n\n")
+
+
+
 def initModules():
     weather()
     sports()
     bus()
+    news()
+
+
+def openHLink(event):
+    start, end = newsdisp.tag_prevrange("hlink", newsdisp.index("@%s,%s" % (event.x, event.y)))
+    webbrowser.open(newsdisp.get(start, end))
+
 
 window.wm_title("ULTIMATE DESKTOP APP")
 
@@ -138,6 +158,11 @@ nscroll.grid(column = 5, row = 4, sticky='ns')
 
 newsdisp.configure(yscrollcommand=nscroll.set)
 nscroll.configure(command=newsdisp.yview)
+
+newsdisp.tag_configure("hlink", foreground='blue', underline=1)
+newsdisp.tag_bind("hlink", "<Button-1>", openHLink)
+
+
 initModules()
 
 window.mainloop()
