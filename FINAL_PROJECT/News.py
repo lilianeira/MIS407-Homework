@@ -38,5 +38,3 @@ for key,url in newsurls.items():
 # Iterate over the allheadlines list and print each headline
 for hl in allheadlines:
     print(hl)
-for l in alllinks:
-    print(l)
