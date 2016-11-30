@@ -23,7 +23,7 @@ def feedparserEntry(parser):
         str = post.s_localstartdate[:10]
         newDate = datetime.datetime.strptime(str, format)
         stamp2 = dateToTimeStamp(newDate)
-        if stamp2 >= nowStamp and countr < 4:
+        if stamp2 >= nowStamp:
             countr = countr + 1
             strr = strr + post.title + " in " + post.ev_location + "\n\n"
     if countr == 0:
