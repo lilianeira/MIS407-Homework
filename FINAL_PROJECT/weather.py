@@ -47,7 +47,8 @@ def today():
             'temp': int(round(data['currently']['temperature'])),
             'summary': data['currently']['summary'],
             'max': int(round(data['daily']["data"][0]['temperatureMax'])),
-            'min': int(round(data['daily']["data"][0]['temperatureMin']))
+            'min': int(round(data['daily']["data"][0]['temperatureMin'])),
+            'cond': data['daily']["data"][0]['summary'],
         }
     except:
         response = {"Error": True}

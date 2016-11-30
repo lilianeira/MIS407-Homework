@@ -7,15 +7,27 @@ import sports as Sports
 window = Tk()
 
 def weather():
-    currentWeather = weatherModule.today()
-    temp = currentWeather["temp"]
-    high = currentWeather["max"]
-    low = currentWeather["min"]
-    cond = currentWeather["summary"]
-    response = "Right now in Ames: \n" + str(temp)
-    response += "°F and " + cond + ".\n\nToday:\nHigh: "
-    response += str(high) + "°F\nLow:"
-    response += " " + str(low) + "°F."
+    wtype = weathervariable.get()
+    if wtype == "today":
+        currentWeather = weatherModule.today()
+        temp = currentWeather["temp"]
+        high = currentWeather["max"]
+        low = currentWeather["min"]
+        later = currentWeather["cond"]
+        cond = currentWeather["summary"]
+        response = "Right now in Ames, it is " + str(temp)
+        response += "°F and " + cond + ".\n\nToday we'll see a high of "
+        response += str(high) + "°F "
+        response += "and a low of " + str(low) + "°F."
+        response += "\n\n" +later
+    else:
+        forecast = weatherModule.tomorrow()
+        high = forecast["max"]
+        low = forecast["min"]
+        cond = forecast["summary"]
+        response = "Tomorrow in Ames, we'll see a high of "
+        response += str(high) + "°F and a low of "
+        response += str(low) + "°F. " + cond
     wthdisp.delete(1.0, END)
     wthdisp.insert(END, response)
 
@@ -57,7 +69,14 @@ team = Label(window, text="Ultimate")
 team.grid(row = 0, column = 0, columnspan = 5)
 
 weatherbtn = Button(window, text="Weather", command = weather)
-weatherbtn.grid(row = 1, column = 0, columnspan = 2)
+weatherbtn.grid(row = 1, column = 0)
+
+weathervariable = StringVar(window)
+weathervariable.set("today")
+
+weatherPick = OptionMenu(window, weathervariable,
+                       "today", "tomorrow")
+weatherPick.grid(column = 1, row =1)
 
 wthdisp = Text(window, width=40, padx=10, wrap=WORD, pady=10, height=8, background="white")
 wthdisp.grid(column = 0, row = 2, columnspan = 2)
