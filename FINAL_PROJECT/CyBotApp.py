@@ -1,6 +1,5 @@
 from tkinter import *
 import bus as busStop
-import sports as sportAll
 import weather as weatherModule
 import News as newsFeed
 
@@ -19,8 +18,7 @@ def weather():
     weatherTxt.set(response)
 
 def sports():
-    sportinfo = sportAll.AllSports()
-    sportTxt.set(sportinfo)
+    sportTxt.set("it works")
 
 def bus(bus_stop):
     busStopInfo = busStop.getRouteTimes(bus_stop)
