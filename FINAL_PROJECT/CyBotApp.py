@@ -4,6 +4,8 @@ import weather as weatherModule
 import News as newsFeed
 import sports as Sports
 
+version = "00.05"
+
 window = Tk()
 
 def weather():
@@ -65,7 +67,7 @@ def initModules():
 
 window.wm_title("ULTIMATE DESKTOP APP")
 
-team = Label(window, text="Ultimate")
+team = Label(window, pady=25, text="Ultimate v"+version, font=("Helvetica", 16))
 team.grid(row = 0, column = 0, columnspan = 5)
 
 weatherbtn = Button(window, text="Weather", command = weather)
