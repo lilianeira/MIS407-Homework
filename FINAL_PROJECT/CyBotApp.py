@@ -59,7 +59,7 @@ team.grid(row = 0, column = 0, columnspan = 5)
 weatherbtn = Button(window, text="Weather", command = weather)
 weatherbtn.grid(row = 1, column = 0, columnspan = 2)
 
-wthdisp = Text(window, width=40, padx=10, pady=10, height=6, background="white")
+wthdisp = Text(window, width=40, padx=10, wrap=WORD, pady=10, height=8, background="white")
 wthdisp.grid(column = 0, row = 2, columnspan = 2)
 wscroll = Scrollbar(window)
 wscroll.grid(column = 2, row = 2, sticky='ns')
@@ -74,7 +74,7 @@ bus_stop.set("1088")
 busentry = Entry(window, textvariable = bus_stop, width = 6)
 
 busentry.grid(row = 1, column = 4)
-busdisp = Text(window, width=40, padx=10, pady=10, height=6, background="white")
+busdisp = Text(window, width=40, padx=10, wrap=WORD, pady=10, height=8, background="white")
 busdisp.grid(column = 3, row = 2, columnspan = 2)
 
 bscroll = Scrollbar(window)
@@ -98,7 +98,7 @@ sportPick = OptionMenu(window, sportvariable,
                        "Tennis", "Volleyball")
 sportPick.grid(column = 1, row =3)
 
-sportdisp = Text(window, width=40, padx=10, pady=10, height=6, background="white")
+sportdisp = Text(window, width=40, padx=10, pady=10, wrap=WORD, height=8, background="white")
 sportdisp.grid(column = 0, row = 4, columnspan = 2)
 
 sscroll = Scrollbar(window)
@@ -109,7 +109,7 @@ sscroll.configure(command=sportdisp.yview)
 
 newsbtn = Button(window, text="News", width=12)
 newsbtn.grid(row = 3, column = 3, columnspan = 2)
-newsdisp = Text(window, width=40, padx=10, pady=10, height=6, background="white")
+newsdisp = Text(window, width=40, padx=10, pady=10, wrap=WORD, height=8, background="white")
 newsdisp.grid(column = 3, row = 4, columnspan = 2)
 
 nscroll = Scrollbar(window)
