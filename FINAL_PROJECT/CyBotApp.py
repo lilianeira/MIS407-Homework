@@ -6,7 +6,7 @@ import webbrowser
 import datetime
 import sports as Sports
 
-version = "00.06"
+version = "01.00"
 
 window = Tk()
 
@@ -49,7 +49,6 @@ def weather():
             response = response + "High of "
             response += str(high) + "°F and a low of "
             response += str(low) + "°F.\n" + cond + "\n\n-----\n\n"
-        print(forecast)
     wthdisp.delete(1.0, END)
     wthdisp.insert(END, response)
 
