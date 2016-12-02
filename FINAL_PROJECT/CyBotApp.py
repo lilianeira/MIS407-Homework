@@ -3,11 +3,24 @@ import bus as busStop
 import weather as weatherModule
 import News as newsFeed
 import webbrowser
+import datetime
 import sports as Sports
 
-version = "00.05"
+version = "00.06"
 
 window = Tk()
+
+
+def dateToString(date):
+    """turns date obj into a string"""
+    format = '%m/%d/%Y'
+    newDate = date.strftime(format)
+    return newDate
+
+
+def stampToDate(str):
+    return datetime.datetime(1970, 1, 1) + datetime.timedelta(seconds=str)
+
 
 def weather():
     wtype = weathervariable.get()
@@ -24,13 +37,19 @@ def weather():
         response += "and a low of " + str(low) + "°F."
         response += "\n\n" +later
     else:
-        forecast = weatherModule.tomorrow()
-        high = forecast["max"]
-        low = forecast["min"]
-        cond = forecast["summary"]
-        response = "Tomorrow in Ames, we'll see a high of "
-        response += str(high) + "°F and a low of "
-        response += str(low) + "°F.\n\n" + cond
+        forecast = weatherModule.sevanDay()
+        response = ""
+        for i in range(0, len(forecast)):
+            dateObj = stampToDate(forecast[i]['date'])
+            dateString = dateToString(dateObj)
+            high = forecast[i]["max"]
+            low = forecast[i]["min"]
+            cond = forecast[i]["summary"]
+            response = response + dateString + "\n"
+            response = response + "High of "
+            response += str(high) + "°F and a low of "
+            response += str(low) + "°F.\n" + cond + "\n\n-----\n\n"
+        print(forecast)
     wthdisp.delete(1.0, END)
     wthdisp.insert(END, response)
 
@@ -97,7 +116,7 @@ weathervariable = StringVar(window)
 weathervariable.set("today")
 
 weatherPick = OptionMenu(window, weathervariable,
-                       "today", "tomorrow")
+                       "today", "7 day")
 weatherPick.grid(column = 1, row =1)
 
 wthdisp = Text(window, width=40, padx=10, wrap=WORD, pady=10, height=8, background="white")

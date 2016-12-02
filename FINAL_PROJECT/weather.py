@@ -53,3 +53,20 @@ def today():
     except:
         response = {"Error": True}
     return response
+
+def sevanDay():
+    """return today's weather"""
+    data = _sendRequest(_defaultLat, _defaultLng)
+    try:
+        responses = []
+        for i in range(1, len(data['daily']["data"])):
+            response = {
+                'date': data['daily']["data"][i]['time'],
+                'max': int(round(data['daily']["data"][i]['temperatureMax'])),
+                'min': int(round(data['daily']["data"][i]['temperatureMin'])),
+                'summary': data['daily']["data"][i]['summary']
+            }
+            responses.append(response)
+        return responses
+    except:
+        return {"Error": True}
